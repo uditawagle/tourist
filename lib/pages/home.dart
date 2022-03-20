@@ -4,9 +4,9 @@ import 'package:tourguide/pages/about_us.dart';
 import 'package:tourguide/pages/contact_us.dart';
 import 'package:tourguide/pages/destination.dart';
 import 'package:tourguide/pages/feedback.dart';
+import 'package:tourguide/pages/maplocation.dart';
+import 'package:tourguide/pages/userpage.dart';
 import 'package:tourguide/pages/weather.dart';
-import 'package:tourguide/pages/welcomepage.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,27 +19,37 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+       // elevation: 0,
         centerTitle: true,
-        title: Text('Home Page', 
-        style: TextStyle(
-          color:Colors.black,
+        title: Text(
+          'Home Page',
+          style: TextStyle(
+            color: Colors.black,
+          ),
         ),
-        ), 
-        backgroundColor: Colors.blueGrey,      ),
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 25, left: 50, right: 50),
-          child: Container(
+        child: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/logo/back.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 90, left: 50, right: 50),
             child: Column(
               children: [
                 ImageWidget(
                   title: 'Destination',
                   onpress: () {
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Destination()),
+                      context,
+                      MaterialPageRoute(builder: (context) => Destination()),
                     );
                   },
                   image: NetworkImage(
@@ -53,8 +63,8 @@ class _HomePageState extends State<HomePage> {
                   title: 'Hotels and \nRestaurant',
                   onpress: () {
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Destination()),
+                      context,
+                      MaterialPageRoute(builder: (context) => Destination()),
                     );
                   },
                   image: NetworkImage(
@@ -66,10 +76,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ImageWidget(
                   title: 'Weather',
-                  onpress:() {
+                  onpress: () {
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoadingScreen()),
+                      context,
+                      MaterialPageRoute(builder: (context) => LoadingScreen()),
                     );
                   },
                   image: NetworkImage(
@@ -82,62 +92,66 @@ class _HomePageState extends State<HomePage> {
                 ImageWidget(
                   title: 'Location',
                   onpress: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MapSample()),
+                    );
                   },
                   image: NetworkImage(
                     'https://th.bing.com/th/id/R.7023d1bccddb34c15efec8519eab289c?rik=%2fW5W%2fEQS4pFwLg&riu=http%3a%2f%2f542partners.com.au%2fwp-content%2fuploads%2f2015%2f07%2fmaps-local-search1-ss-1920.jpg&ehk=Te%2fZ3Wqs%2f3aTlsK6REP7cxIJo%2b7YbD6sOqjUMIxqVdg%3d&risl=&pid=ImgRaw&r=0',
                   ),
-                ),SizedBox(
+                ),
+                SizedBox(
                   height: 15,
                 ),
                 ImageWidget(
                   title: 'About Us',
-                  onpress:() {
+                  onpress: () {
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => About()),
+                      context,
+                      MaterialPageRoute(builder: (context) => About()),
                     );
-                  }, 
+                  },
                   image: NetworkImage(
                     'https://th.bing.com/th/id/OIP.sFYVBBWq5lOIdUQ0cH32kAHaD0?pid=ImgDet&rs=1',
-                ),
+                  ),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 ImageWidget(
                   title: 'Feedback',
-                  onpress:() {
+                  onpress: () {
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FeedbackScreen()),
+                      context,
+                      MaterialPageRoute(builder: (context) => FeedbackScreen()),
                     );
-                  }, 
+                  },
                   image: NetworkImage(
                     'https://p0.pikrepo.com/preview/227/148/people-communicating-speech-bubbles.jpg',
-                ),
+                  ),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 ImageWidget(
                   title: 'Contact Us',
-                  onpress:() {
+                  onpress: () {
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Contact()),
+                      context,
+                      MaterialPageRoute(builder: (context) => Contact()),
                     );
                   },
                   image: NetworkImage(
                     'https://th.bing.com/th/id/R.7b6fe5ff0e92ddad19dca8d1723b79f9?rik=QTJmaalKeYwyZg&pid=ImgRaw&r=0',
-                ),
+                  ),
                 ),
               ],
             ),
           ),
         ),
       ),
-       drawer: Drawer(
+      drawer: Drawer(
         child: Material(
           child: ListView(
             children: [
@@ -158,15 +172,14 @@ class _HomePageState extends State<HomePage> {
                 },
                 title: 'Home',
                 icon: Icons.home,
-               
               ),
               Newlist(
                 press: () {},
-                title: 'Category',
+                title: 'Weather',
                 icon: Icons.dashboard,
               ),
               Divider(
-                color: Colors.yellow,
+                color: Colors.black,
               ),
               Newlist(
                 press: () {},
@@ -182,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                 press: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => WelcomePage(),
+                      builder: (context) => Body(),
                     ),
                   );
                 },
@@ -210,7 +223,7 @@ class ImageWidget extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Stack(
         alignment: Alignment.center,
@@ -258,23 +271,13 @@ class Newlist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        title: Text(title),
-        hoverColor: hoverColor,
-        leading: Icon(
-          icon,
-          color: kPrimaryColor,
-        ),
-        onTap: press,
-      
+      title: Text(title),
+      hoverColor: hoverColor,
+      leading: Icon(
+        icon,
+        color: kPrimaryColor,
+      ),
+      onTap: press,
     );
   }
 }
-
-// class ColorFilters {
-//   static final greyscale = ColorFilter.matrix(<double>[
-//   0.2126,0.7152,0.0722,0,0,
-//   0.2126,0.7152,0.0722,0,0,
-//   0.2126,0.7152,0.0722,0,0,
-//   0,0,0,1,0,
-//   ]);
-// }

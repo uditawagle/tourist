@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../database.dart';
+
 
 class About extends StatelessWidget {
+  DatabaseService db = DatabaseService();
+ // List<about> aboutList = [];
+  ScrollController _scrollController = new ScrollController();
+
   final String _name = "Travel Guide";
   final String _status = "Feel the best experience of your life";
   final String bio =
@@ -12,10 +18,10 @@ class About extends StatelessWidget {
   
   Widget _buildCover(Size screenSize) {
     return Container(
-      height: 215,
+      height: 280,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/pink.jpg"),
+          image: AssetImage("assets/logo/pink.jpg"),
           fit: BoxFit.cover,
         ),
       ),
@@ -29,7 +35,7 @@ class About extends StatelessWidget {
         height: 140,
         decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/first.png"),
+              image: AssetImage("assets/logo/first.png"),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(80),
@@ -119,48 +125,56 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(children: <Widget>[
-        _buildCover(screenSize),
-        SafeArea(
-            child: Column(
+      body: ListView.builder(
+        controller: _scrollController,
+        //itemCount: aboutList.length,
+        itemBuilder: (BuildContext context, int index) {
+        return Stack(
           children: <Widget>[
-            SizedBox(
-              height: screenSize.height / 5.3,
-            ),
-            _buildLogoImage(),
-            SizedBox(
-              height: 2,
-            ),
-            _buildFullName(),
-            _buildStatus(),
-            SizedBox(
-              height: 10,
-            ),
-            _buildBio(),
-            SizedBox(height: 5,),
-            _buildBioo(),
-            SizedBox(
-              height: 10,
-            ),
-            _buildSeparators(screenSize),
-          ],
-        )),
-        Positioned(
-          top: 20,
-          left: 10,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Icon(Icons.arrow_back, 
-              color: Colors.white,
+          _buildCover(screenSize),
+          SafeArea(
+              child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: screenSize.height / 5.3,
+              ),
+              _buildLogoImage(),
+              SizedBox(
+                height: 2,
+              ),
+              _buildFullName(),
+              _buildStatus(),
+              SizedBox(
+                height: 10,
+              ),
+              _buildBio(),
+              SizedBox(height: 5,),
+              _buildBioo(),
+              SizedBox(
+                height: 10,
+              ),
+              _buildSeparators(screenSize),
+            ],
+          )),
+          Positioned(
+            top: 20,
+            left: 10,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Icon(Icons.arrow_back, 
+                color: Colors.white,
+                ),
               ),
             ),
-          ),
-        )
-      ]),
+          )
+        ]
+        );
+        },
+      ),
     );
   }
 }

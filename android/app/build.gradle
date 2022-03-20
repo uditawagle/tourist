@@ -62,11 +62,7 @@ android {
 flutter {
     source '../..'
 }
- 
 
 dependencies {
-    classpath 'com.android.tools.build:gradle:7.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
-
-

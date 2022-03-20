@@ -9,7 +9,7 @@ class Contact extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.blueGrey.shade200,
         body: Padding(
-          padding: const EdgeInsets.only(top: 15),
+          padding: const EdgeInsets.only(top: 25),
           child: ContactUs(
             avatarRadius: 60,
             dividerColor: Colors.black26,

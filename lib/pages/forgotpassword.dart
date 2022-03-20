@@ -15,7 +15,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/lan.jpg'),
+          image: AssetImage('assets/logo/lan.jpg'),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
             Colors.black54, BlendMode.darken),

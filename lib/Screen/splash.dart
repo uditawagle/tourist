@@ -1,4 +1,5 @@
-import 'package:tourguide/pages/welcomepage.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:tourguide/pages/userpage.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -8,9 +9,9 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   void initState() {
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 7), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => WelcomePage()));
+          context, MaterialPageRoute(builder: (context) => Body()));
     });
     super.initState();
   }
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color.fromARGB(255, 170, 186, 194),
       body: Container(
         alignment: Alignment.center,
         child: Column(
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset(
-              'assets/travel.json',
+              'assets/logo.json',
               width: 500,
               height: 300,
             ),
@@ -34,18 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 30,
             ),
             Text(
-              "Welcome to Nepal Tourist Guide App",
-              style: TextStyle(
+              "Nepal Tourist Guide App",
+              style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 25,
                 color: Colors.black,
-                shadows: <Shadow>[
-                  Shadow(
-                    offset: Offset(10.0, 10.0),
-                    blurRadius: 3.0,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ],
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/pages/loginpage.dart';
@@ -12,15 +13,15 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: 800,
+        height: 1000,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/jun.jpg'),
+            image: AssetImage('assets/logo/jun.jpg'),
             fit: BoxFit.cover,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(35.0),
           child: Column(
             children: [
               BackdropFilter(
@@ -31,20 +32,24 @@ class WelcomePage extends StatelessWidget {
                     'WANT TO TRAVEL PLACES OF NEPAL??',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.tradeWinds(
-                        fontSize: 32, color: Colors.black),
+                        fontSize: 30, color: Colors.black),
                   ),
                 ),
               ),
               SizedBox(
-                height: 3,
+                height: 5,
               ),
-              Text(
+              AnimatedTextKit(
+              animatedTexts: [
+                TyperAnimatedText(
                 'It feels good to be lost in the right direction',
-                style: TextStyle(
+                textStyle: TextStyle(
                   color: Colors.brown,
                   fontWeight: FontWeight.w700,
-                  fontSize: 14,
+                  fontSize: 15,
                 ),
+              ),
+              ],
               ),
               SizedBox(
                 height: 170,

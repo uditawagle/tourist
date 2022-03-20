@@ -52,7 +52,7 @@ class _LocationScreenState extends State<LocationScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/night.png'),
+            image: AssetImage('assets/logo/night.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.white.withOpacity(0.8), BlendMode.dstATop),
@@ -116,15 +116,15 @@ class _LocationScreenState extends State<LocationScreen> {
                     Text(
                       '$temperature',
                       style: TextStyle(
-  fontFamily: 'Source Sans Pro',
-  fontSize: 80.0,
-),
+                        fontFamily: 'Source Sans Pro',
+                        fontSize: 80.0
+                        ),
                     ),
                     Text(
                       weatherIcon,
                       style: TextStyle(
-  fontSize: 70.0,
-),
+                        fontSize: 70.0,
+                        ),
                     ),
                   ],
                 ),
@@ -135,8 +135,8 @@ class _LocationScreenState extends State<LocationScreen> {
                   '$weatherMessgae in $cityName',
                   textAlign: TextAlign.right,
                   style: TextStyle(
-  fontFamily: 'Source Sans Pro',
-  fontSize: 40.0,),
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 40.0,),
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tourguide/database.dart';
 
 class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({ Key? key }) : super(key: key);
@@ -9,6 +10,11 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
+  DatabaseService db = DatabaseService();
+  TextEditingController feedbacks = new TextEditingController();
+  TextEditingController rate = new TextEditingController();
+  TextEditingController email = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +41,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           Column(
             children: [
               Textone(
-                //cont: name,
+                cont: email,
                 title: 'Email',
                 sectitle: 'Enter your email here',
               ),
@@ -43,7 +49,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 height: 7,
               ),
               Textone(
-               // cont: contact,
+               cont: rate,
                 title: 'Rate us (From 1-10))',
                 sectitle: 'Enter your rating here',
               ),
@@ -51,7 +57,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 height: 7,
               ),
               Textone(
-               // cont: feedbacks,
+               cont: feedbacks,
                 title: 'Feedback',
                 sectitle: 'Enter your feedback here',
               ),
@@ -68,35 +74,35 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       MaterialStateProperty.all<Color>(Colors.white),
                 ),
                 onPressed: () async {
-                  // if (name.text == '') {
-                  //   _showDialogEmptyFeedback();
-                  // } else if (contact.text == '') {
-                  //   _showDialogEmptyFeedback();
-                  // } else if (feedbacks.text == '') {
-                  //   _showDialogEmptyFeedback();
-                  // } else {
-                  //   var res = await db.insertFeedback(
-                  //       "1", contact.text, name.text, feedbacks.text);
-                  //   print("${res}ressss");
+                  if (email.text == '') {
+                    _showDialogEmptyFeedback();
+                  } else if (rate.text == '') {
+                    _showDialogEmptyFeedback();
+                  } else if (feedbacks.text == '') {
+                    _showDialogEmptyFeedback();
+                  } else {
+                    var res = await db.insertFeedback(
+                        '1', email.text, rate.text, feedbacks.text);
+                    print("${res}ressss");
 
-                  //   if (res == 200) {
-                  //     showDialog(
-                  //       context: context,
-                  //       builder: (context) => AlertDialog(
-                  //         title: Text(
-                  //           "Thankyou for your feedback!!",
-                  //           style: TextStyle(
-                  //               fontSize: 12,
-                  //               color: Colors.green,
-                  //               fontStyle: FontStyle.italic),
-                  //         ),
-                  //       ),
-                  //     );
-                  //     print("Success");
-                  //   } else {
-                  //     print("Failure");
-                  //   }
-                  // }
+                    if (res == 200) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            "Thankyou for your feedback!!",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.green,
+                                fontStyle: FontStyle.italic),
+                          ),
+                        ),
+                      );
+                      print("Success");
+                    } else {
+                      print("Failure");
+                    }
+                  }
                 },
                 icon: Icon(Icons.send, size: 13,),
                 label: Text(
@@ -110,22 +116,49 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       ),
     );
   }
+  
+_showDialogEmptyFeedback() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              "Message",
+              style: TextStyle(color: Colors.black, fontSize: 14),
+            ),
+            content: Text(
+              "Feedback is Empty",
+              style: TextStyle(color: Colors.black38, fontSize: 14),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Close"),
+              ),
+            ],
+          );
+        });
+  }
 }
 
+
+
 class Textone extends StatelessWidget {
- // final TextEditingController cont;
+ final TextEditingController cont;
   final String title;
   final String sectitle;
 
-  Textone({ required this.title, required this.sectitle});
+  Textone({ required this.title, required this.sectitle,
+  required this.cont });
 
-//required this.cont
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 60, left: 30, right: 30),
       child: TextFormField(
-        //controller: cont,
+        controller: cont,
         maxLines: 1,
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
