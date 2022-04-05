@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/classs/language.dart';
+import 'package:tourguide/localization/Language.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EverestDetail extends StatefulWidget {
@@ -14,7 +15,29 @@ class EverestDetail extends StatefulWidget {
 class _EverestDetailState extends State<EverestDetail> {
   late PageController _pageController;
 
-  void _changeLanguage(Object? language) {}
+  void _changeLanguage(language) {
+    Locale _temp;
+    switch (language.langaugecode){
+      case 'en':
+      _temp = Locale(language.langaugecode, 'US');
+      break;
+       case 'fa':
+      _temp = Locale(language.langaugecode, 'IR');
+      break;
+       case 'ar':
+      _temp = Locale(language.langaugecode, 'SA');
+      break;
+       case 'hi':
+      _temp = Locale(language.langaugecode, 'IN');
+      break;
+      default:
+      _temp = Locale(language.langaugecode, 'US');
+    }
+    LanguageClass.setLocale(context, _temp);
+  }
+  // void _changeLanguage(Object? language) {
+    
+  // }
   void _onScroll() {}
 
   @override

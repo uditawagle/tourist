@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tourguide/components/hotels.dart';
 import 'package:tourguide/pages/about_us.dart';
 import 'package:tourguide/pages/contact_us.dart';
 import 'package:tourguide/pages/destination.dart';
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.blueGrey,
        // elevation: 0,
         centerTitle: true,
         title: Text(
@@ -34,12 +35,12 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/logo/back.jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
+          // decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //       image: AssetImage("assets/logo/back.jpg"),
+          //       fit: BoxFit.cover,
+          //     ),
+          //   ),
           child: Padding(
             padding: const EdgeInsets.only(top: 90, left: 50, right: 50),
             child: Column(
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   onpress: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Destination()),
+                      MaterialPageRoute(builder: (context) => Hotels()),
                     );
                   },
                   image: NetworkImage(

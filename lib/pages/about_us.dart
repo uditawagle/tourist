@@ -6,7 +6,7 @@ import '../database.dart';
 
 class About extends StatelessWidget {
   DatabaseService db = DatabaseService();
- // List<about> aboutList = [];
+  //List<about> aboutList = [];
   ScrollController _scrollController = new ScrollController();
 
   final String _name = "Travel Guide";

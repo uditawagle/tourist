@@ -1,7 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tourguide/pages/userpage.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tourguide/pages/welcomepage.dart';
 
 class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
@@ -11,7 +11,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(Duration(seconds: 7), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Body()));
+          context, MaterialPageRoute(builder: (context) => WelcomePage()));
     });
     super.initState();
   }

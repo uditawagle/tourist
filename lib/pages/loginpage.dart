@@ -7,9 +7,12 @@ import 'package:tourguide/pages/home.dart';
 import 'package:tourguide/pages/register.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
    var confirmPass; 
+  
+  late final TextEditingController controller;
 
   DatabaseService db = DatabaseService();
   TextEditingController email = new TextEditingController();
@@ -17,8 +20,9 @@ class LoginScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    _showDialogEmpty() {
-      showDialog(
+    
+  _showDialogEmpty() {
+    showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -27,7 +31,7 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(color: Colors.black, fontSize: 14),
             ),
             content: Text(
-              "Login is Empty",
+              "Feedback is Empty",
               style: TextStyle(color: Colors.black38, fontSize: 14),
             ),
             actions: [
@@ -41,6 +45,7 @@ class LoginScreen extends StatelessWidget {
           );
         });
   }
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Form(
@@ -137,8 +142,7 @@ class LoginScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.white, width: 1)),
                     ),
                     obscureText: true,
-                     
-                validator: (String? pword){
+                    validator: (String? pword){
                   confirmPass = pword;
                   if(pword == null || pword.isEmpty){
                     return "Please Enter New Password";
@@ -147,7 +151,6 @@ class LoginScreen extends StatelessWidget {
 
                   }
                     _formKey.currentState!.save();
-
                   return null;
                 },
                 // onSaved: (String? pword){
@@ -182,16 +185,13 @@ class LoginScreen extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                   child: ElevatedButton(
-                    onPressed: () async {
-                     if (email.text == '') {
-                    _showDialogEmpty();
-                  } else if (password.text == '') {
+                  onPressed: () async {
+                     if (email.text == '' || password.text == '') {
                     _showDialogEmpty();
                   } else {
-                    var res = await db.insertlogin(
-                       email.text, password.text);
-                    print("${res}ressss");
-
+                    var res = await db.login(
+                      email.text, password.text);
+                   // print("${res}ressss");
                     if (res == 200) {
                       showDialog(
                         context: context,
@@ -209,7 +209,7 @@ class LoginScreen extends StatelessWidget {
                     } else {
                       print("Failure");
                     }
-                  };
+                  }
                    Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => HomePage()),
@@ -283,6 +283,8 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+ 
 
 class Button1 extends StatelessWidget {
   final String title;

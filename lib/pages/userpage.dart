@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tourguide/mainpage/adminlogin.dart';
 import 'package:tourguide/pages/welcomepage.dart';
 
 class Body extends StatefulWidget {
@@ -40,7 +39,7 @@ class _BodyState extends State<Body> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => LoginPage(),
+                      builder: (context) => WelcomePage(),
                     ),
                   );
                 },

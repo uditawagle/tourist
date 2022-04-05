@@ -26,15 +26,16 @@ class DatabaseService{
     return allitems;
   }
 
-  Future<int> insertFeedback(
-    String uid, String email, String rate, String feedbacks) async {
+  Future<int> insertFeedback(String email, String rate, String feedbacks) async {
+    print(email);
+    print(rate);
+    print(feedbacks);
     var data = await http.get(
-      Uri.parse("$BASE_URL/api/insertFeedback?Uid=${uid}Email=${email}&Rate=${rate}&Feedback=${feedbacks}"),
+      Uri.parse("$BASE_URL/api/insertFeedback?email=${email}&rate=${rate}&feedback=${feedbacks}"),
     );
     int code = data.statusCode;
     var jsonData = json.decode((data.body));
-    String val = jsonData["error"];
-    // ignore: unnecessary_null_comparison
+    String? val = jsonData["error"];
     if (val == null) {
       val = "";
     }
@@ -43,20 +44,22 @@ class DatabaseService{
   }
 
 
-Future<int> insertlogin(
-    String email, String password) async {
+Future<int> login( String email, String password) async {
+  print(email);
+  print(password);
     var data = await http.get(
-      Uri.parse("$BASE_URL/api/insertlogin?email=${email}&password=${password}}"),
+      Uri.parse("$BASE_URL/api/login?email=${email}&password=${password}"),
     );
-    int code = data.statusCode;
-    var jsonData = json.decode((data.body));
-    String val = jsonData["error"];
-    // ignore: unnecessary_null_comparison
-    if (val == null) {
-      val = "";
-    }
-    print(val);
-    return code;
+    print('aayo');
+    print(data);
+    //int code = data.statusCode;
+    //var jsonData = json.decode((data.body));
+    //String? val = jsonData["error"];
+    // if (val == null) {
+    //   val = "";
+    // }
+    //print(code);
+    return 200;
   }
 }
 

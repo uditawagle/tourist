@@ -194,7 +194,7 @@ class Details extends StatelessWidget {
                           fontSize: 15
                         ),
                         ),
-                        SizedBox(width: 170),
+                        SizedBox(width: 130),
                         StarWidget(
                           color: Colors.yellow,
                         ),

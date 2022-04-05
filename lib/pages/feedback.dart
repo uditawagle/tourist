@@ -82,7 +82,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     _showDialogEmptyFeedback();
                   } else {
                     var res = await db.insertFeedback(
-                        '1', email.text, rate.text, feedbacks.text);
+                        email.text, rate.text, feedbacks.text);
                     print("${res}ressss");
 
                     if (res == 200) {
