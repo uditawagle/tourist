@@ -1,117 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tourguide/classs/about.dart';
 
 import '../database.dart';
 
+class AboutUs extends StatefulWidget {
+  @override
+  State<AboutUs> createState() => _AboutUsState();
+}
 
-class About extends StatelessWidget {
+class _AboutUsState extends State<AboutUs> {
   DatabaseService db = DatabaseService();
-  //List<about> aboutList = [];
+  List<About> aboutList = [];
   ScrollController _scrollController = new ScrollController();
 
-  final String _name = "Travel Guide";
-  final String _status = "Feel the best experience of your life";
-  final String bio =
-      "Travel Guide help you to explore beautiful places of Nepal. Nepal is one of beautiful country in world having Mount Everest, the highest mountain peak in the world with various natural resources and the Birthplace of Gautama Buddha-Lumbini. Some of the major tourism activities in Nepal are mountain climbing, trekking, paragliding, rafting. ";
-  final String bioo =
-      'Our main motive is to attract tourist from different countries and help them to find their destination with promotion of our tourism sector as well as traditions and culture of nepalese peoples and help our country to earn more currencies from this industry.';
+  int offset = 0;
+
+  int currentDataLength = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetch(offset);
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        if (currentDataLength >= 10) {
+          print("List bigger than 10");
+
+          offset = aboutList.length;
+          fetch(offset);
+        }
+
+        print("called again");
+        print(" OFFSET $offset  CURRENT VALUE $currentDataLength");
+      }
+    });
+  }
+
+  fetch(int offset) async {
+    print("in fetch");
+
+    var data = await db.allitem();
+    currentDataLength = data.length;
+    print("below data");
+
+    print("out of loop");
+
+    setState(() {
+      for (About p in data) {
+        aboutList.add(p);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
   
-  Widget _buildCover(Size screenSize) {
-    return Container(
-      height: 280,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/logo/pink.jpg"),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLogoImage() {
-    return Center(
-      child: Container(
-        width: 140,
-        height: 140,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/logo/first.png"),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(80),
-            border: Border.all(
-              color: Colors.black,
-              width: 1,
-            )),
-      ),
-    );
-  }
-
-  Widget _buildFullName() {
-    return Text(
-      _name,
-      style: GoogleFonts.martel(
-      color: Colors.teal,
-      fontSize: 28,
-      fontWeight: FontWeight.w700,
-      )
-    );
-  }
-
-  Widget _buildStatus() {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 4.0,
-        horizontal: 6,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        _status,
-        style: GoogleFonts.dancingScript(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBio() {
-    TextStyle bioTextStyle = TextStyle(
-      fontWeight: FontWeight.w500,
-      color: Colors.black,
-      fontSize: 16,
-    );
-    return Container(
-      color: Colors.white24,
-      padding: EdgeInsets.all(2),
-      child: Text(
-        bio,
-        textAlign: TextAlign.center,
-        style: bioTextStyle,
-      ),
-    );
-  }
-
-   Widget _buildBioo() {
-    TextStyle bioTextStyle = TextStyle(
-      fontWeight: FontWeight.w500,
-      color: Colors.black,
-      fontSize: 16,
-    );
-    return Container(
-      color: Colors.white24,
-      padding: EdgeInsets.all(2),
-      child: Text(
-        bioo,
-        textAlign: TextAlign.center,
-        style: bioTextStyle,
-      ),
-    );
-  }
-
   Widget _buildSeparators(Size screensize) {
     return Container(
       width: screensize.width / 1.2,
@@ -127,52 +75,131 @@ class About extends StatelessWidget {
     return Scaffold(
       body: ListView.builder(
         controller: _scrollController,
-        //itemCount: aboutList.length,
+        itemCount: aboutList.length,
         itemBuilder: (BuildContext context, int index) {
-        return Stack(
-          children: <Widget>[
-          _buildCover(screenSize),
-          SafeArea(
-              child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: screenSize.height / 5.3,
-              ),
-              _buildLogoImage(),
-              SizedBox(
-                height: 2,
-              ),
-              _buildFullName(),
-              _buildStatus(),
-              SizedBox(
-                height: 10,
-              ),
-              _buildBio(),
-              SizedBox(height: 5,),
-              _buildBioo(),
-              SizedBox(
-                height: 10,
-              ),
-              _buildSeparators(screenSize),
-            ],
-          )),
-          Positioned(
-            top: 20,
-            left: 10,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Icon(Icons.arrow_back, 
-                color: Colors.white,
+          return Stack(children: <Widget>[
+            Container(
+              height: 280,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("${aboutList[index].imagee}"),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-          )
-        ]
-        );
+            SafeArea(
+                child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: screenSize.height / 5.3,
+                ),
+                Center(
+                  child: Container(
+                    width: 140,
+                    height: 140,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("${aboutList[index].image}"),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(80),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        )),
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Text("${aboutList[index].name}",
+                    style: GoogleFonts.martel(
+                      color: Colors.teal,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                    )
+                    ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 4.0,
+                    horizontal: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    "${aboutList[index].status}",
+                    style: GoogleFonts.dancingScript(
+                      color: Color.fromARGB(255, 4, 2, 27),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    color: Colors.white24,
+                    padding: EdgeInsets.all(2),
+                    child: Text(
+                      "${aboutList[index].bio}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 7,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    color: Colors.white24,
+                    padding: EdgeInsets.all(2),
+                    child: Text(
+                      "${aboutList[index].bioo}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 14,
+                ),
+                _buildSeparators(screenSize),
+                SizedBox(
+                  height: 9,
+                ),
+              ],
+            ),
+            ),
+            Positioned(
+              top: 20,
+              left: 10,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
+          ]);
         },
       ),
     );

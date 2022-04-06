@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/components/detailshotel.dart';
 import 'package:tourguide/pages/booking.dart';
 
@@ -13,32 +14,6 @@ class _PavilionsState extends State<Pavilions> {
   @override
    Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Minimum price per night: \$128",
-              style: TextStyle(fontSize: 20),
-            ),
-            Container(
-              height: 60,
-              child: MaterialButton(
-                minWidth: 220,
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                color: Color(0xff3C4657),
-                child: const Text(
-                  "Book Now",
-                  style: TextStyle(fontSize: 22, color: Colors.white),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
@@ -63,7 +38,7 @@ class _PavilionsState extends State<Pavilions> {
                           Container(
                             height: 50,
                             decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 133, 147, 151),
+                                color: Color.fromARGB(255, 200, 217, 221),
                                 borderRadius: BorderRadius.circular(12)),
                             width: 55,
                             child: IconButton(
@@ -91,36 +66,25 @@ class _PavilionsState extends State<Pavilions> {
                     Text(
                       'The Pavilions Himalayas',
                       style: TextStyle(
-                          fontSize: 35,
+                          fontSize: 30,
                           fontWeight: FontWeight.w600,
                           color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text('Review: 5'),
-                      ],
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Icon(Icons.location_on, size: 23),
+                        Icon(Icons.location_on, size: 17),
                         SizedBox(
                           width: 5,
                         ),
-                        Text('Chisapani, Pokhara', style: TextStyle(fontSize: 24)),
+                        Text('Chisapani, Pokhara', 
+                        style: TextStyle(
+                          fontSize: 17, 
+                          color: Colors.brown,
+                        ),
+                        ),
                       ],
                     ),
                     
@@ -129,10 +93,10 @@ class _PavilionsState extends State<Pavilions> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(top: 20, left: 10, right: 10),
+                    EdgeInsets.only(top: 20, left: 10, right: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       "Place Description",
                       style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
@@ -141,7 +105,7 @@ class _PavilionsState extends State<Pavilions> {
                       padding: EdgeInsets.only(top: 8, left: 3, right: 3),
                       child: Text(
                         "Situated in Pokhara, The Pavilions Himalayas The Farm provides 5-star accommodation with private terraces. All rooms feature a flat-screen TV with satellite channels and a private bathroom. The hotel features an outdoor swimming pool and free WiFi throughout the property. At the hotel, all rooms are fitted with a desk. Selected rooms also boast a kitchenette with a fridge. All rooms feature a wardrobe. A continental breakfast is served every morning at the property. Guests can grab a bite to eat in the in-house restaurant, which serves a variety of international and local dishes. \nHotels rooms are big in size with different features and price vary. Each room consists of one double bed or two single bed. Customers can choose any rooms with pay price according to rooms facilities. \nThe Pavilions Himalayas The Farm offers a fitness centre. Hiking is among the activities that guests can enjoy near the accommodation. Yoga can be enjoyed at an additional charge. Languages spoken at the reception include English and Hindi.",
-                        style: TextStyle(fontSize: 15),
+                        style: GoogleFonts.nunito( fontSize: 15),
                       ),
                     ),
                   ],
@@ -215,6 +179,89 @@ class _PavilionsState extends State<Pavilions> {
                       ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 3, left: 24, right: 15),
+                child: Row(
+                  children: [
+                    Text('Reviews', 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                    SizedBox(
+                      width: 120,
+                    ),
+                    Text('Minimum Price', 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 8, top:3),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        SizedBox(
+                          width: 9,
+                        ),
+                        Text('5'),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 100,
+                    ),
+                    Text('\$96', 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 50
+              ),
+              Center(
+                child: Container(
+                  height: 60,
+                  child: MaterialButton(
+                    minWidth: 220,
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    color: Color(0xff3C4657),
+                    child: const Text(
+                      "Book Now",
+                      style: TextStyle(fontSize: 22, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20
               ),
             ],
           ),
@@ -1485,7 +1532,7 @@ class _ManakamanaResortState extends State<ManakamanaResort> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
                 color: Color(0xff3C4657),
-                child: const Text(
+                child: Text(
                   "Book Now",
                   style: TextStyle(fontSize: 22, color: Colors.white),
                 ),

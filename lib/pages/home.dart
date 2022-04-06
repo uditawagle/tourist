@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                   onpress: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => About()),
+                      MaterialPageRoute(builder: (context) => AboutUs()),
                     );
                   },
                   image: NetworkImage(
