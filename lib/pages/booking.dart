@@ -1,20 +1,29 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tourguide/database.dart';
 
-class Booking extends StatefulWidget {
-  const Booking({Key? key}) : super(key: key);
+class BookingScreen extends StatefulWidget {
+  const BookingScreen({Key? key}) : super(key: key);
 
   @override
-  State<Booking> createState() => _BookingState();
+  State<BookingScreen> createState() => _BookingScreenState();
 }
 
-class _BookingState extends State<Booking> {
+class _BookingScreenState extends State<BookingScreen> {
+  DatabaseService db = DatabaseService();
+  TextEditingController name = new TextEditingController();
+  TextEditingController checkin = new TextEditingController();
+  TextEditingController checkout = new TextEditingController();
+  TextEditingController roomneeded = new TextEditingController();
+  TextEditingController adult = new TextEditingController();
+  TextEditingController child = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top: 30, left: 5, right: 5, bottom: 5),
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -72,8 +81,14 @@ class _BookingState extends State<Booking> {
                   SizedBox(
                     width: 400,
                     // height: 40,
-                    child: TextField(
-                      //controller: name,
+                    child: TextFormField(
+                      controller: name,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Field value is requried";
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                         labelText: 'Enter Hotel Name',
                         enabledBorder: OutlineInputBorder(
@@ -100,27 +115,31 @@ class _BookingState extends State<Booking> {
                   SizedBox(height: 10),
                   SizedBox(
                     width: 250,
-                    child: TextField(
-                      //controller: name,
-                      onTap: () async {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(DateTime.now().year),
-                          lastDate: DateTime(DateTime.now().year + 21),
-                        );
+                    child: TextFormField(
+                      controller: checkin,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Field value is requried";
+                        }
+                        return null;
                       },
+                      // onTap: () async {
+                      //   FocusScope.of(context).requestFocus(FocusNode());
+                      //   await showDatePicker(
+                      //     context: context,
+                      //     initialDate: DateTime.now(),
+                      //     firstDate: DateTime(DateTime.now().year),
+                      //     lastDate: DateTime(DateTime.now().year + 21),
+                      //   );
+                      // },
                       decoration: InputDecoration(
                         labelText: 'Enter Date',
                         enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: Colors.blue),
+                          borderSide: BorderSide(width: 1, color: Colors.blue),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: Colors.red),
+                          borderSide: BorderSide(width: 1, color: Colors.red),
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
@@ -139,27 +158,32 @@ class _BookingState extends State<Booking> {
                   SizedBox(height: 10),
                   SizedBox(
                     width: 250,
-                    child: TextField(
-                      //controller: name,
-                      onTap: () async {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(DateTime.now().year),
-                          lastDate: DateTime(DateTime.now().year + 21),
-                        );
+                    child: TextFormField(
+                      controller: checkout,
+
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Field value is requried";
+                        }
+                        return null;
                       },
+                      // onTap: () async {
+                      //   FocusScope.of(context).requestFocus(FocusNode());
+                      //   await showDatePicker(
+                      //     context: context,
+                      //     initialDate: DateTime.now(),
+                      //     firstDate: DateTime(DateTime.now().year),
+                      //     lastDate: DateTime(DateTime.now().year + 21),
+                      //   );
+                      // },
                       decoration: InputDecoration(
                         labelText: 'Enter Date',
                         enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: Colors.blue),
+                          borderSide: BorderSide(width: 1, color: Colors.blue),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: Colors.red),
+                          borderSide: BorderSide(width: 1, color: Colors.red),
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
@@ -180,8 +204,14 @@ class _BookingState extends State<Booking> {
                   ),
                   SizedBox(
                     width: 300,
-                    child: TextField(
-                      //controller: name,
+                    child: TextFormField(
+                      controller: roomneeded,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Field value is requried";
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                         labelText: 'Enter Room Needed',
                         enabledBorder: OutlineInputBorder(
@@ -214,8 +244,14 @@ class _BookingState extends State<Booking> {
                       children: [
                         SizedBox(
                           width: 170,
-                          child: TextField(
-                            //controller: name,
+                          child: TextFormField(
+                            controller: adult,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Field value is requried";
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
                               labelText: 'Enter Adult Number',
                               enabledBorder: OutlineInputBorder(
@@ -236,8 +272,14 @@ class _BookingState extends State<Booking> {
                         ),
                         SizedBox(
                           width: 170,
-                          child: TextField(
-                            //controller: name,
+                          child: TextFormField(
+                            controller: child,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Field value is requried";
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
                               labelText: 'Enter Child Number',
                               enabledBorder: OutlineInputBorder(
@@ -261,7 +303,45 @@ class _BookingState extends State<Booking> {
                   ),
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (name.text == '' ||
+                            roomneeded.text == '' ||
+                            adult.text == '' ||
+                            child.text == '') {
+                          _showDialogEmptyBooking();
+                        } else if (checkin.text == '') {
+                          _showDialogEmptyBooking();
+                        } else if (checkout.text == '') {
+                          _showDialogEmptyBooking();
+                        } else {
+                          var res = await db.insertbooking(
+                              name.text,
+                              checkin.text,
+                              checkout.text,
+                              roomneeded.text,
+                              adult.text,
+                              child.text);
+                          print("${res}ressss");
+
+                          if (res == 200) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text(
+                                  "Booking is confirmed",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.green,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            );
+                            print("Success");
+                          } else {
+                            print("Failure");
+                          }
+                        }
+                      },
                       child: Text(
                         'Book',
                         style: TextStyle(
@@ -282,7 +362,7 @@ class _BookingState extends State<Booking> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 23,
                   ),
                 ],
               ),
@@ -291,5 +371,30 @@ class _BookingState extends State<Booking> {
         ),
       ),
     );
+  }
+
+  _showDialogEmptyBooking() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              "Message",
+              style: TextStyle(color: Colors.black, fontSize: 14),
+            ),
+            content: Text(
+              "Booking is Empty",
+              style: TextStyle(color: Colors.black38, fontSize: 14),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Close"),
+              ),
+            ],
+          );
+        });
   }
 }

@@ -1,51 +1,59 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/database.dart';
-import 'package:tourguide/pages/forgotpassword.dart';
 import 'package:tourguide/pages/home.dart';
 import 'package:tourguide/pages/register.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
-class LoginScreen extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-   var confirmPass; 
-  
-  late final TextEditingController controller;
-
-  DatabaseService db = DatabaseService();
-  TextEditingController email = new TextEditingController();
-  TextEditingController password = new TextEditingController();
-  
   @override
-  Widget build(BuildContext context) {
-    
-  _showDialogEmpty() {
-    showDialog(
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  DatabaseService db = DatabaseService();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  validator() async {
+    if (password.text == '' || email.text == '') {
+      showDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              "Message",
-              style: TextStyle(color: Colors.black, fontSize: 14),
-            ),
-            content: Text(
-              "Feedback is Empty",
-              style: TextStyle(color: Colors.black38, fontSize: 14),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Close"),
-              ),
-            ],
-          );
-        });
+        builder: (context) => AlertDialog(title: Text("Please provide required field!", 
+        style: TextStyle( fontSize: 15, fontWeight: FontWeight.w600, color: Colors.brown))),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(title: Text("Sucessfully login",
+         style: TextStyle( fontSize: 15, fontWeight: FontWeight.w600, color: Colors.brown))),
+      );
+      var res = await db.insertlogin(email.text, password.text);
+      print("${res}ressss");
+    }
+
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+    } else {
+      print('Page not found');
+    }
   }
 
+  final white = Colors.white;
+  final _passwordFocusNode = FocusNode();
+  bool hidePassword = true;
+  final outlineInputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(10.0),
+    ),
+    borderSide: BorderSide(color: Colors.white),
+  );
+
+  @override
+  Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Form(
@@ -79,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                       )),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
@@ -95,87 +103,90 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: size.height * 0.05),
                 Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal: 40),
+                  margin: EdgeInsets.symmetric(horizontal: 30),
                   child: TextFormField(
+                    autofocus: true,
                     controller: email,
-                    style: TextStyle(
-                      color: Colors.white, fontSize: 17),
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      labelText: "Email",
-                      hintText: 'my@gmail.com',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 1),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white, width: 1)),
-                    ),
-                  validator: (String? email){
-                  if(email == null || email.isEmpty){
-                    return "Field email is requried";
-                  }else if(!RegExp(r"^([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)$").hasMatch(email)){
-                    return "Please enter correct one";
-                  }
-                  return null;
-                },     
-                  ),
-                ),
-                SizedBox(height: size.height * 0.03),
-                Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal: 40),
-                  child: TextFormField(
-                    controller: password,
-                    style: TextStyle(color: Colors.white, fontSize: 17),
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      labelText: "Password",
-                      hintText: '123456789 not this make strong one',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 1),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white, width: 1)),
-                    ),
-                    obscureText: true,
-                    validator: (String? pword){
-                  confirmPass = pword;
-                  if(pword == null || pword.isEmpty){
-                    return "Please Enter New Password";
-                  }else if(pword.length <= 6){
-                    return "Password should not be less than 6 characters";
+                    onSaved: (newValue) {
+                      print("email: $newValue");
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please type your email';
+                      }
 
-                  }
-                    _formKey.currentState!.save();
-                  return null;
-                },
-                // onSaved: (String? pword){
-                //   model.password = pword!;
-                // },
+                      return null;
+                    },
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_passwordFocusNode);
+                    },
+                    textInputAction: TextInputAction.next,
+                    style: TextStyle(
+                      color: white,
+                    ),
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      focusedBorder: outlineInputBorder,
+                      border: outlineInputBorder,
+                      hintStyle: TextStyle(
+                        color: white,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.account_circle_outlined,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
-                  height: 3,
+                  height: 25,
                 ),
                 Container(
-                  alignment: Alignment.centerRight,
-                  margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ForgotPassword()),
-                      );
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  child: TextFormField(
+                    maxLines: 1,
+                    obscureText: hidePassword,
+                    focusNode: _passwordFocusNode,
+                    controller: password,
+                    onSaved: (newValue) {
+                      print("Password: $newValue");
                     },
-                    child: Text(
-                      "Forgot your password?",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white60,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter your password';
+                      }
+                      if (value.length < 4) {
+                        return 'password must be at least 4 characters';
+                      }
+
+                      return null;
+                    },
+                    style: TextStyle(
+                      color: white,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Password',
+                      focusedBorder: outlineInputBorder,
+                      border: outlineInputBorder,
+                      hintStyle: TextStyle(
+                        color: white,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.lock_open_outlined,
+                        color: Colors.white54,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            hidePassword = !hidePassword;
+                          });
+                        },
+                        icon: Icon(
+                          hidePassword ? Icons.visibility : Icons.visibility_off,
+                          color: Colors.white70,
+                        ),
                       ),
                     ),
                   ),
@@ -185,39 +196,13 @@ class LoginScreen extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                   child: ElevatedButton(
-                  onPressed: () async {
-                     if (email.text == '' || password.text == '') {
-                    _showDialogEmpty();
-                  } else {
-                    var res = await db.login(
-                      email.text, password.text);
-                   // print("${res}ressss");
-                    if (res == 200) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text(
-                            "Thankyou!!",
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.green,
-                                fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      );
-                      print("Success");
-                    } else {
-                      print("Failure");
-                    }
-                  }
-                   Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
+                    onPressed: () async {
+                      validator();
                     },
                     child: Text(
                       "Login",
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                     ),
                     style: ElevatedButton.styleFrom(
                       onPrimary: Colors.black,
@@ -254,10 +239,11 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: 35,
                 ),
-                Text('- - - - - - - - - - - - OR Login With - - - - - - - - - - ',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                Text(
+                  '- - - - - - - - - - - - OR Login With - - - - - - - - - - ',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
                 SizedBox(
                   height: 30,
@@ -275,57 +261,14 @@ class LoginScreen extends StatelessWidget {
                   title: "Login With Google",
                   icon: Icons.g_mobiledata_outlined,
                 ),
+                SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
- 
-
-class Button1 extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final String link;
-
-  Button1({required this.title, required this.icon, 
-  required this.link});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton.icon(
-      style: TextButton.styleFrom(
-        minimumSize: Size(250, 50),
-        primary: Colors.black,
-        backgroundColor: Color.fromARGB(255, 89, 125, 141),
-        shape: BeveledRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-      ),
-      icon: Icon(icon, 
-      color: Colors.white,
-      size: 35,
-      ),
-      onPressed: () {},
-      label: RichText(
-          text: TextSpan(
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-              ),
-              text: title,
-              recognizer: TapGestureRecognizer()
-                ..onTap = () async {
-                  var url = link;
-                  if (await canLaunch(url)) {
-                    await launch(url);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                })),
     );
   }
 }

@@ -11,9 +11,11 @@ class FeedbackScreen extends StatefulWidget {
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
   DatabaseService db = DatabaseService();
-  TextEditingController feedbacks = new TextEditingController();
-  TextEditingController rate = new TextEditingController();
+  TextEditingController uid = new TextEditingController();
   TextEditingController email = new TextEditingController();
+  TextEditingController rate  = new TextEditingController();
+  TextEditingController  feedbacks= new TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +59,20 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             Column(
               children: [
                 Textone(
+                  cont: uid,
+                  title: 'User Id',
+                  sectitle: 'Enter your user id here',
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Textone(
                   cont: email,
                   title: 'Email',
                   sectitle: 'Enter your email here',
                 ),
                 SizedBox(
-                  height: 7,
+                  height: 5,
                 ),
                 Textone(
                   cont: rate,
@@ -70,7 +80,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   sectitle: 'Enter your rating here',
                 ),
                 SizedBox(
-                  height: 7,
+                  height: 5,
                 ),
                 Textone(
                   cont: feedbacks,
@@ -91,15 +101,17 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () async {
-                    if (email.text == '') {
+                    if (email.text == '' ) {
                       _showDialogEmptyFeedback();
-                    } else if (rate.text == '') {
+                    } else if (uid.text == '') {
+                      _showDialogEmptyFeedback();
+                    }else if (rate.text == '') {
                       _showDialogEmptyFeedback();
                     } else if (feedbacks.text == '') {
                       _showDialogEmptyFeedback();
                     } else {
-                      var res = await db.insertFeedback(
-                          email.text, rate.text, feedbacks.text);
+                      var res = await db.insertfeedback(
+                         uid.text,  email.text, rate.text, feedbacks.text);
                       print("${res}ressss");
 
                       if (res == 200) {

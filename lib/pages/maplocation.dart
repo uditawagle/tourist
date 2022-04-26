@@ -14,22 +14,16 @@ class MapSampleState extends State<MapSample> {
   TextEditingController _searchController = TextEditingController();
 
   static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(27.700769, 85.300140),
+    target: LatLng(12.591490, 74.979210),
     zoom: 14.4746,
   );
-
-  // static final CameraPosition _kLake = CameraPosition(
-  //     bearing: 192.8334901395799,
-  //     target: LatLng(27.700769, 85.300140),
-  //     tilt: 59.440717697143555,
-  //     zoom: 19.151926040649414);
 
   //for general location
   static final Marker _kGooglePlexMarker = Marker(
     markerId: MarkerId('_kGooglePlex'),
     infoWindow: InfoWindow(title: 'Google Plex'),
     icon: BitmapDescriptor.defaultMarker,
-    position: LatLng(27.700769, 85.300140),
+    position: LatLng(12.591490, 74.979210),
   );
 
   //for lake marker

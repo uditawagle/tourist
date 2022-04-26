@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:tourguide/classs/booking.dart';
+import 'package:tourguide/classs/hotelyak.dart';
+import 'package:tourguide/classs/karnali.dart';
+import 'package:tourguide/classs/ktmguest.dart';
+import 'package:tourguide/database.dart';
+import 'package:tourguide/pages/booking.dart';
 
 class HotelYakYeti extends StatefulWidget {
   const HotelYakYeti({Key? key}) : super(key: key);
@@ -8,36 +15,64 @@ class HotelYakYeti extends StatefulWidget {
 }
 
 class _HotelYakYetiState extends State<HotelYakYeti> {
+  DatabaseService db = DatabaseService();
+  List<HotelYak> hlist = [];
+  ScrollController _controllerr = new ScrollController();
+
+  int offset = 0;
+
+  int currentDataLength = 0;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    fetch(offset);
+    _controllerr.addListener(() {
+      if (_controllerr.position.pixels == _controllerr.position.maxScrollExtent) {
+        if (currentDataLength >= 10) {
+          print("List bigger than 10");
+
+          offset = hlist.length;
+          fetch(offset);
+        }
+
+        print("called again");
+        print(" OFFSET $offset  CURRENT VALUE $currentDataLength");
+      }
+    });
+  }
+
+  fetch(int offset) async {
+    print("in fetch");
+
+    var data = await db.hlist();
+    currentDataLength = data.length;
+    print("below data");
+
+    print("out of loop");
+
+    setState(() {
+      for (HotelYak P in data) {
+        hlist.add(P);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controllerr.dispose();
+    super.dispose();
+  }
+
+
+  @override
+   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Minimum price per night: \$67",
-              style: TextStyle(fontSize: 20),
-            ),
-            Container(
-              height: 60,
-              child: MaterialButton(
-                minWidth: 220,
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                color: Color(0xff3C4657),
-                child: const Text(
-                  "Book Now",
-                  style: TextStyle(fontSize: 22, color: Colors.white),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
+      body: ListView.builder(
+        controller: _controllerr,
+        itemCount: hlist.length,
+        itemBuilder: (BuildContext context, int index) {
+          return SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Column(
@@ -48,7 +83,7 @@ class _HotelYakYetiState extends State<HotelYakYeti> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/hotel/yeti.jpg'),
+                      image: AssetImage("${hlist[index].image}"),
                       fit: BoxFit.cover),
                 ),
                 child: Stack(
@@ -60,10 +95,7 @@ class _HotelYakYetiState extends State<HotelYakYeti> {
                         children: [
                           Container(
                             height: 50,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 133, 147, 151),
-                                borderRadius: BorderRadius.circular(12)),
-                            width: 55,
+                            width: 50,
                             child: IconButton(
                               onPressed: () {
                                 Navigator.pop(context);
@@ -87,38 +119,27 @@ class _HotelYakYetiState extends State<HotelYakYeti> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hotel Yak & Yeti',
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w600,
+                      "${hlist[index].name}",
+                      style: GoogleFonts.nunito(
+                          fontSize: 31,
+                          fontWeight: FontWeight.w700,
                           color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text('Review: 5'),
-                      ],
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Icon(Icons.location_on, size: 23),
+                        Icon(Icons.location_on, size: 17),
                         SizedBox(
-                          width: 5,
+                          width: 10,
                         ),
-                        Text('Durbar Marg, Kathmandu', style: TextStyle(fontSize: 24)),
+                        Text("${hlist[index].location}", 
+                        style: TextStyle(
+                          fontSize: 17, 
+                          color: Colors.brown,
+                        ),
+                        ),
                       ],
                     ),
                     
@@ -127,19 +148,19 @@ class _HotelYakYetiState extends State<HotelYakYeti> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(top: 20, left: 10, right: 10),
+                    EdgeInsets.only(top: 20, left: 10, right: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      "Place Description",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+                      "${hlist[index].title}",
+                      style: GoogleFonts.nunito(fontSize: 21, fontWeight: FontWeight.w600),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 8, left: 3, right: 3),
                       child: Text(
-                        "The 5-star Hotel Yak & Yeti is housed in a heritage palace in central Kathmandu, surrounded by antique fountains and landscaped gardens. It also has a casino, an outdoor pool, and 2 tennis courts. Parking is free. \nDecorated in beautiful colour palettes, the elegant air-conditioned rooms are equipped with a cable TV and minibar. Some rooms have a personal safe and bathrobes. Certain bathrooms come with a bathtub. \nGuests can head to the beauty salon or exercise at the fitness centre. The hotel also provides a well-equipped business centre, meeting rooms and a tour desk. Laundry and dry cleaning service is available. Drinks can be enjoyed at The Chimney & Pub. We serve Halal meat.",
-                        style: TextStyle(fontSize: 15),
+                        "${hlist[index].description}",
+                        style: GoogleFonts.nunito( fontSize: 15),
                       ),
                     ),
                   ],
@@ -150,37 +171,37 @@ class _HotelYakYetiState extends State<HotelYakYeti> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Top Facilities:',
-                style: TextStyle(
-                  fontSize: 22,
+                child: Text("${hlist[index].title1}",
+                style: GoogleFonts.nunito(
+                  fontSize: 21,
                   color: Color.fromARGB(255, 50, 17, 56),
                   fontWeight: FontWeight.w600
                 ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 27, left: 13, right: 13),
+                padding: EdgeInsets.only(top: 23, left: 13, right: 13),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Button(
                       colorss: Color.fromRGBO(145, 233, 148, 1),
-                      text: 'Free Wifi',
+                      text: "${hlist[index].text1}",
                       icon: Icons.wifi,
                     ),
                     Button(
                       colorss: Color.fromARGB(255, 158, 228, 221),  
-                      text: 'Spa and \nwellness Centre',
-                      icon: Icons.spa_sharp,
+                      text: "${hlist[index].text2}",
+                      icon: Icons.ac_unit_rounded,
                     ),
                     Button(
                       colorss:  Color.fromARGB(255, 245, 214, 167),
-                      text: 'Food',
+                      text: "${hlist[index].text3}",
                       icon: Icons.restaurant,
                     ),
                     Button(
                       colorss: Color.fromARGB(255, 114, 195, 233),
-                      text: 'Pool',
+                      text: "${hlist[index].text4}",
                       icon: Icons.pool,
                     ),
                   ],
@@ -193,30 +214,125 @@ class _HotelYakYetiState extends State<HotelYakYeti> {
                   children: [
                     Button(
                       colorss:Color.fromARGB(255, 145, 233, 148),
-                      text: 'Non-smoking \nrooms',
+                      text: "${hlist[index].text5}",
                       icon: Icons.smoke_free_outlined,
                     ),
                     Button(
                         colorss: Color.fromARGB(255, 114, 195, 233),
-                        text: 'Airport Shuttle',
+                        text: "${hlist[index].text6}",
                         icon: Icons.airport_shuttle,
                       ),
                       Button(
                         colorss: Color.fromARGB(255, 225, 233, 114),
-                        text: 'Family room',
+                        text: "${hlist[index].text7}",
                         icon: Icons.family_restroom,
                       ),
                       Button(
                         colorss: Color.fromARGB(255, 207, 226, 171),
-                        text: 'Bar',
-                        icon: Icons.local_drink,
+                        text: "${hlist[index].text8}",
+                        icon: Icons.local_drink_outlined,
                       ),
                   ],
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10, left: 24, right: 15),
+                child: Row(
+                  children: [
+                    Text(
+                      "${hlist[index].title3}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                    SizedBox(
+                      width: 120,
+                    ),
+                    Text(
+                      "${hlist[index].title4}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 8, top:3),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        SizedBox(
+                          width: 9,
+                        ),
+                        Text('5'),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 100,
+                    ),
+                    Text( 
+                      "${hlist[index].price}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 60
+              ),
+              Center(
+                child: Container(
+                  height: 55,
+                  child: MaterialButton(
+                    minWidth: 220,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BookingScreen()
+                            ),
+                            );
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    color: Color(0xff3C4657),
+                    child: Text(
+                      "${hlist[index].button}",
+                      style: GoogleFonts.nunito(fontSize: 22, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20
+              ),
             ],
           ),
         ),
+      );
+        },
       ),
     );
   }
@@ -259,42 +375,70 @@ class Button extends StatelessWidget {
 
 class KarnaliLodge extends StatefulWidget {
   const KarnaliLodge({Key? key}) : super(key: key);
-
+  
   @override
   State<KarnaliLodge> createState() => _KarnaliLodgeState();
 }
 
 class _KarnaliLodgeState extends State<KarnaliLodge> {
+ DatabaseService db = DatabaseService();
+ List<TopKarnali> klist= [];
+  ScrollController _controllerr = new ScrollController();
+
+  int offset = 0;
+
+  int currentDataLength = 0;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    fetch(offset);
+    _controllerr.addListener(() {
+      if (_controllerr.position.pixels == _controllerr.position.maxScrollExtent) {
+        if (currentDataLength >= 10) {
+          print("List bigger than 10");
+
+          offset = klist.length;
+          fetch(offset);
+        }
+
+        print("called again");
+        print(" OFFSET $offset  CURRENT VALUE $currentDataLength");
+      }
+    });
+  }
+
+  fetch(int offset) async {
+    print("in fetch");
+
+    var data = await db.klist();
+    currentDataLength = data.length;
+    print("below data");
+
+    print("out of loop");
+
+    setState(() {
+      for (TopKarnali P in data) {
+        klist.add(P);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controllerr.dispose();
+    super.dispose();
+  }
+
+
+  @override
+   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Minimum price per night: \$225",
-              style: TextStyle(fontSize: 20),
-            ),
-            Container(
-              height: 60,
-              child: MaterialButton(
-                minWidth: 220,
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                color: Color(0xff3C4657),
-                child: const Text(
-                  "Book Now",
-                  style: TextStyle(fontSize: 22, color: Colors.white),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
+      body: ListView.builder(
+        controller: _controllerr,
+        itemCount: klist.length,
+        itemBuilder: (BuildContext context, int index) {
+          return SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Column(
@@ -305,7 +449,7 @@ class _KarnaliLodgeState extends State<KarnaliLodge> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/hotel/karnali.jpg'),
+                      image: AssetImage("${klist[index].image}"),
                       fit: BoxFit.cover),
                 ),
                 child: Stack(
@@ -317,10 +461,7 @@ class _KarnaliLodgeState extends State<KarnaliLodge> {
                         children: [
                           Container(
                             height: 50,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 133, 147, 151),
-                                borderRadius: BorderRadius.circular(12)),
-                            width: 55,
+                            width: 50,
                             child: IconButton(
                               onPressed: () {
                                 Navigator.pop(context);
@@ -344,38 +485,27 @@ class _KarnaliLodgeState extends State<KarnaliLodge> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Tiger Tops Karnali Lodge',
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w600,
+                      "${klist[index].name}",
+                      style: GoogleFonts.nunito(
+                          fontSize: 31,
+                          fontWeight: FontWeight.w700,
                           color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.white, size: 20),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text('Review: 4'),
-                      ],
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Icon(Icons.location_on, size: 23),
+                        Icon(Icons.location_on, size: 17),
                         SizedBox(
-                          width: 5,
+                          width: 10,
                         ),
-                        Text('Bardia, 44600 Bhurkia', style: TextStyle(fontSize: 24)),
+                        Text("${klist[index].location}", 
+                        style: TextStyle(
+                          fontSize: 17, 
+                          color: Colors.brown,
+                        ),
+                        ),
                       ],
                     ),
                     
@@ -383,19 +513,20 @@ class _KarnaliLodgeState extends State<KarnaliLodge> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+                padding:
+                    EdgeInsets.only(top: 20, left: 10, right: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      "Place Description",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+                      "${klist[index].title}",
+                      style: GoogleFonts.nunito(fontSize: 21, fontWeight: FontWeight.w600),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 8, left: 3, right: 3),
                       child: Text(
-                        "Located in the Baria National Park, Tiger Tops Karnali Lodge delights guests with elephant polo. The 24-hour front desk makes check-in and check-out easy at all hours. Free Wi-Fi is available in all areas. \nThe fan-cooled rooms feature a wardrobe and a seating area. The attached bathroom is equipped with a shower. Guests can head to the garden or the library to unwind. Laundry, dry cleaning and BBQ facilities are available.",
-                        style: TextStyle(fontSize: 15),
+                        "${klist[index].description}",
+                        style: GoogleFonts.nunito( fontSize: 15),
                       ),
                     ),
                   ],
@@ -406,37 +537,37 @@ class _KarnaliLodgeState extends State<KarnaliLodge> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Top Facilities:',
-                style: TextStyle(
-                  fontSize: 22,
+                child: Text("${klist[index].title1}",
+                style: GoogleFonts.nunito(
+                  fontSize: 21,
                   color: Color.fromARGB(255, 50, 17, 56),
                   fontWeight: FontWeight.w600
                 ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 27, left: 13, right: 13),
+                padding: EdgeInsets.only(top: 23, left: 13, right: 13),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Button(
                       colorss: Color.fromRGBO(145, 233, 148, 1),
-                      text: 'Free Wifi',
+                      text: "${klist[index].text1}",
                       icon: Icons.wifi,
                     ),
                     Button(
                       colorss: Color.fromARGB(255, 158, 228, 221),  
-                      text: 'Dry Cleaning',
+                      text: "${klist[index].text2}",
                       icon: Icons.dry_cleaning,
                     ),
                     Button(
                       colorss:  Color.fromARGB(255, 245, 214, 167),
-                      text: 'Food',
+                      text: "${klist[index].text3}",
                       icon: Icons.restaurant,
                     ),
                     Button(
                       colorss: Color.fromARGB(255, 114, 195, 233),
-                      text: 'Garden',
+                      text: "${klist[index].text4}",
                       icon: Icons.nature,
                     ),
                   ],
@@ -447,32 +578,120 @@ class _KarnaliLodgeState extends State<KarnaliLodge> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                      Button(
-                        colorss: Color.fromARGB(255, 225, 233, 114),
-                        text: 'Room',
-                        icon: Icons.family_restroom_sharp,
-                      ),
-                       Button(
-                        colorss: Color.fromARGB(255, 207, 226, 171),
-                        text: 'Private Shuttle',
+                    Button(
+                      colorss:Color.fromARGB(255, 196, 201, 241),
+                      text: "${klist[index].text5}",
+                      icon: Icons.family_restroom_sharp,
+                    ),
+                    Button(
+                        colorss: Color.fromARGB(255, 245, 194, 153),
+                        text: "${klist[index].text6}",
                         icon: Icons.airport_shuttle_outlined,
                       ),
                       Button(
-                        colorss: Color.fromARGB(255, 207, 226, 171),
-                        text: 'Bar',
+                        colorss: Color.fromARGB(255, 225, 233, 114),
+                        text: "${klist[index].text7}",
                         icon: Icons.local_drink,
                       ),
                       Button(
                         colorss: Color.fromARGB(255, 207, 226, 171),
-                        text: 'Parking',
+                        text: "${klist[index].text8}",
                         icon: Icons.local_parking_outlined,
                       ),
                   ],
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10, left: 24, right: 15),
+                child: Row(
+                  children: [
+                    Text(
+                      "${klist[index].title3}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                    SizedBox(
+                      width: 120,
+                    ),
+                    Text(
+                      "${klist[index].title4}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 8, top:3),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.grey, size: 20),
+                        SizedBox(
+                          width: 9,
+                        ),
+                        Text('4'),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 100,
+                    ),
+                    Text( 
+                      "${klist[index].price}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 60
+              ),
+              Center(
+                child: Container(
+                  height: 55,
+                  child: MaterialButton(
+                    minWidth: 220,
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    color: Color(0xff3C4657),
+                    child: Text(
+                      "${klist[index].button}",
+                      style: GoogleFonts.nunito(fontSize: 22, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20
+              ),
             ],
           ),
         ),
+      );
+        },
       ),
     );
   }
@@ -486,36 +705,64 @@ class KathmanduGuest extends StatefulWidget {
 }
 
 class _KathmanduGuestState extends State<KathmanduGuest> {
+  DatabaseService db = DatabaseService();
+ List<KtmGuest> glist= [];
+  ScrollController _controllerr = new ScrollController();
+
+  int offset = 0;
+
+  int currentDataLength = 0;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    fetch(offset);
+    _controllerr.addListener(() {
+      if (_controllerr.position.pixels == _controllerr.position.maxScrollExtent) {
+        if (currentDataLength >= 10) {
+          print("List bigger than 10");
+
+          offset = glist.length;
+          fetch(offset);
+        }
+
+        print("called again");
+        print(" OFFSET $offset  CURRENT VALUE $currentDataLength");
+      }
+    });
+  }
+
+  fetch(int offset) async {
+    print("in fetch");
+
+    var data = await db.glist();
+    currentDataLength = data.length;
+    print("below data");
+
+    print("out of loop");
+
+    setState(() {
+      for (KtmGuest P in data) {
+        glist.add(P);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controllerr.dispose();
+    super.dispose();
+  }
+
+
+  @override
+   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Minimum price per night: \$45",
-              style: TextStyle(fontSize: 20),
-            ),
-            Container(
-              height: 60,
-              child: MaterialButton(
-                minWidth: 220,
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                color: Color(0xff3C4657),
-                child: const Text(
-                  "Book Now",
-                  style: TextStyle(fontSize: 22, color: Colors.white),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
+      body: ListView.builder(
+        controller: _controllerr,
+        itemCount: glist.length,
+        itemBuilder: (BuildContext context, int index) {
+          return SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Column(
@@ -526,7 +773,7 @@ class _KathmanduGuestState extends State<KathmanduGuest> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/hotel/kathmanduguest.jpg'),
+                      image: AssetImage("${glist[index].image}"),
                       fit: BoxFit.cover),
                 ),
                 child: Stack(
@@ -538,10 +785,7 @@ class _KathmanduGuestState extends State<KathmanduGuest> {
                         children: [
                           Container(
                             height: 50,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 133, 147, 151),
-                                borderRadius: BorderRadius.circular(12)),
-                            width: 55,
+                            width: 50,
                             child: IconButton(
                               onPressed: () {
                                 Navigator.pop(context);
@@ -565,38 +809,27 @@ class _KathmanduGuestState extends State<KathmanduGuest> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Kathmandu Guest House',
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w600,
+                      "${glist[index].name}",
+                      style: GoogleFonts.nunito(
+                          fontSize: 31,
+                          fontWeight: FontWeight.w700,
                           color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.orange, size: 20),
-                        Icon(Icons.star, color: Colors.white, size: 20),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text('Review: 4'),
-                      ],
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Icon(Icons.location_on, size: 23),
+                        Icon(Icons.location_on, size: 17),
                         SizedBox(
-                          width: 5,
+                          width: 10,
                         ),
-                        Text('Thamel, Kathmandu', style: TextStyle(fontSize: 24)),
+                        Text("${glist[index].location}", 
+                        style: TextStyle(
+                          fontSize: 17, 
+                          color: Colors.brown,
+                        ),
+                        ),
                       ],
                     ),
                     
@@ -604,19 +837,20 @@ class _KathmanduGuestState extends State<KathmanduGuest> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+                padding:
+                    EdgeInsets.only(top: 20, left: 10, right: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      "Place Description",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+                      "${glist[index].title}",
+                      style: GoogleFonts.nunito(fontSize: 21, fontWeight: FontWeight.w600),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 8, left: 3, right: 3),
                       child: Text(
-                        "Kathmandu Guest House offers affordable accommodation conveniently located in the popular tourist district of Thamel. It features an on-site restaurant and free private parking.Guests can purchase unique jewellery at the hotel’s gift shop or have a beauty treatment at salon. It also has a convenience store and a tour desk that helps with discounted travel arrangements. \nRooms are surrounded by greenery and are fitted with large windows. They come with an en suite bathroom that has hot/cold shower facilities.",
-                        style: TextStyle(fontSize: 15),
+                        "${glist[index].description}",
+                        style: GoogleFonts.nunito( fontSize: 15),
                       ),
                     ),
                   ],
@@ -627,39 +861,39 @@ class _KathmanduGuestState extends State<KathmanduGuest> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Top Facilities:',
-                style: TextStyle(
-                  fontSize: 22,
+                child: Text("${glist[index].title1}",
+                style: GoogleFonts.nunito(
+                  fontSize: 21,
                   color: Color.fromARGB(255, 50, 17, 56),
                   fontWeight: FontWeight.w600
                 ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 27, left: 13, right: 13),
+                padding: EdgeInsets.only(top: 23, left: 13, right: 13),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Button(
                       colorss: Color.fromRGBO(145, 233, 148, 1),
-                      text: 'Free Wifi',
+                      text: "${glist[index].text1}",
                       icon: Icons.wifi,
                     ),
                     Button(
                       colorss: Color.fromARGB(255, 158, 228, 221),  
-                      text: 'Spa and wellness Centre',
+                      text: "${glist[index].text2}",
                       icon: Icons.spa,
                     ),
                     Button(
                       colorss:  Color.fromARGB(255, 245, 214, 167),
-                      text: 'Parking',
+                      text: "${glist[index].text3}",
                       icon: Icons.local_parking,
                     ),
-                    Button(
-                      colorss: Color.fromARGB(255, 114, 195, 233),
-                      text: 'Coffee maker \nin all rooms',
-                      icon: Icons.coffee,
-                    ),
+                     Button(
+                        colorss: Color.fromARGB(255, 207, 226, 171),
+                        text: "${glist[index].text8}",
+                        icon: Icons.local_drink,
+                      ),
                   ],
                 ),
               ),
@@ -668,36 +902,126 @@ class _KathmanduGuestState extends State<KathmanduGuest> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     Button(
-                      colorss:Color.fromARGB(255, 145, 233, 148),
-                      text: 'Non-smoking \nrooms',
+                    Button(
+                      colorss:Color.fromARGB(255, 196, 201, 241),
+                      text: "${glist[index].text5}",
                       icon: Icons.smoke_free_outlined,
                     ),
                     Button(
-                        colorss: Color.fromARGB(255, 114, 195, 233),
-                        text: 'Airport Shuttle',
-                        icon: Icons.airport_shuttle,
+                        colorss: Color.fromARGB(255, 245, 194, 153),
+                        text: "${glist[index].text6}",
+                        icon: Icons.airport_shuttle_outlined,
                       ),
                       Button(
                         colorss: Color.fromARGB(255, 225, 233, 114),
-                        text: 'Family room',
+                        text: "${glist[index].text7}",
                         icon: Icons.family_restroom,
                       ),
                       Button(
-                        colorss: Color.fromARGB(255, 207, 226, 171),
-                        text: 'Bar',
-                        icon: Icons.local_drink,
-                      ),
+                      colorss: Color.fromARGB(255, 114, 195, 233),
+                      text: "${glist[index].text4}",
+                      icon: Icons.coffee_maker,
+                    ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10, left: 24, right: 15),
+                child: Row(
+                  children: [
+                    Text(
+                      "${glist[index].title3}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                    SizedBox(
+                      width: 120,
+                    ),
+                    Text(
+                      "${glist[index].title4}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 8, top:3),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.orange, size: 20),
+                        Icon(Icons.star, color: Colors.grey, size: 20),
+                        SizedBox(
+                          width: 9,
+                        ),
+                        Text('4'),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 100,
+                    ),
+                    Text( 
+                      "${glist[index].price}", 
+                    style: GoogleFonts.nunito( 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(255, 8, 29, 46),
+                    ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 60
+              ),
+              Center(
+                child: Container(
+                  height: 55,
+                  child: MaterialButton(
+                    minWidth: 220,
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    color: Color(0xff3C4657),
+                    child: Text(
+                      "${glist[index].button}",
+                      style: GoogleFonts.nunito(fontSize: 22, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20
               ),
             ],
           ),
         ),
+      );
+        },
       ),
     );
   }
 }
+
+
 
 class HotelHeritage extends StatefulWidget {
   const HotelHeritage({Key? key}) : super(key: key);
@@ -1079,11 +1403,6 @@ class _EncounterNepalSpaState extends State<EncounterNepalSpa> {
                       text: 'Coffee Maker',
                       icon: Icons.coffee_maker,
                     ),
-                    Button(
-                      colorss:  Color.fromARGB(255, 245, 214, 167),
-                      text: 'Bar',
-                      icon: Icons.local_drink,
-                    ),
                   ],
                 ),
               ),
@@ -1096,6 +1415,11 @@ class _EncounterNepalSpaState extends State<EncounterNepalSpa> {
                       colorss: Color.fromRGBO(145, 233, 148, 1),
                       text: 'Spa and wellness \ncentre',
                       icon: Icons.spa,
+                    ),
+                    Button(
+                      colorss:  Color.fromARGB(255, 245, 214, 167),
+                      text: 'Bar',
+                      icon: Icons.local_drink,
                     ),
                     Button(
                       colorss: Color.fromRGBO(145, 233, 148, 1),

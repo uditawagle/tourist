@@ -1,8 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tourguide/classs/language.dart';
-import 'package:tourguide/localization/Language.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EverestDetail extends StatefulWidget {
@@ -15,29 +13,6 @@ class EverestDetail extends StatefulWidget {
 class _EverestDetailState extends State<EverestDetail> {
   late PageController _pageController;
 
-  void _changeLanguage(language) {
-    Locale _temp;
-    switch (language.langaugecode){
-      case 'en':
-      _temp = Locale(language.langaugecode, 'US');
-      break;
-       case 'fa':
-      _temp = Locale(language.langaugecode, 'IR');
-      break;
-       case 'ar':
-      _temp = Locale(language.langaugecode, 'SA');
-      break;
-       case 'hi':
-      _temp = Locale(language.langaugecode, 'IN');
-      break;
-      default:
-      _temp = Locale(language.langaugecode, 'US');
-    }
-    LanguageClass.setLocale(context, _temp);
-  }
-  // void _changeLanguage(Object? language) {
-    
-  // }
   void _onScroll() {}
 
   @override
@@ -54,34 +29,6 @@ class _EverestDetailState extends State<EverestDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          DropdownButton(
-            onChanged: (language) {
-              _changeLanguage(language);
-            },
-            underline: SizedBox(),
-            icon: Icon(
-              Icons.language_outlined,
-              color: Color.fromARGB(255, 99, 46, 109),
-              size: 34,
-            ),
-            items: Language.languageList()
-                .map<DropdownMenuItem<Language>>(
-                  (lang) => DropdownMenuItem(
-                    value: lang,
-                    child: Row(
-                      children: [Text(lang.name), Text(lang.flag)],
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-        ],
-      ),
       body: PageView(
         controller: _pageController,
         children: [
@@ -240,47 +187,50 @@ class Details extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          size: 15,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          'Solukhumbu District, Nepal',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
-                        ),
-                        SizedBox(width: 80),
-                        StarWidget(
-                          color: Colors.yellow,
-                        ),
-                        StarWidget(
-                          color: Colors.yellow,
-                        ),
-                        StarWidget(
-                          color: Colors.yellow,
-                        ),
-                        StarWidget(
-                          color: Colors.yellow,
-                        ),
-                        StarWidget(
-                          color: Colors.yellow,
-                        ),
-                        SizedBox(
-                          width: 2,
-                          height: 4,
-                        ),
-                        Text(
-                          '5.0',
-                          style: TextStyle(
-                            color: Colors.white70,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.location_on,
+                            size: 15,
+                            color: Colors.white,
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'Solukhumbu District, Nepal',
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                          SizedBox(width: 40),
+                          StarWidget(
+                            color: Colors.yellow,
+                          ),
+                          StarWidget(
+                            color: Colors.yellow,
+                          ),
+                          StarWidget(
+                            color: Colors.yellow,
+                          ),
+                          StarWidget(
+                            color: Colors.yellow,
+                          ),
+                          StarWidget(
+                            color: Colors.yellow,
+                          ),
+                          SizedBox(
+                            width: 2,
+                            height: 4,
+                          ),
+                          Text(
+                            '5.0',
+                            style: TextStyle(
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20,

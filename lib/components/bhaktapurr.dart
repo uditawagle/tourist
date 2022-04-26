@@ -194,7 +194,7 @@ class Details extends StatelessWidget {
                           fontSize: 15
                         ),
                         ),
-                        SizedBox(width: 130),
+                        SizedBox(width: 40),
                         StarWidget(
                           color: Colors.yellow,
                         ),
@@ -252,7 +252,7 @@ class Details extends StatelessWidget {
                         } else {
                           throw 'Could not launch $url';
                         }
-                        })
+                        }),
                       ),
                       SizedBox(
                         height: 20,

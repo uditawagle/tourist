@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tourguide/classs/about.dart';
+import 'package:tourguide/classs/review.dart';
 import 'package:tourguide/database.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Review extends StatefulWidget {
   @override
@@ -22,8 +24,7 @@ class _ReviewState extends State<Review> {
     super.initState();
     fetch(offset);
     _controller.addListener(() {
-      if (_controller.position.pixels ==
-          _controller.position.maxScrollExtent) {
+      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
         if (currentDataLength >= 10) {
           print("List bigger than 10");
 
@@ -40,7 +41,7 @@ class _ReviewState extends State<Review> {
   fetch(int offset) async {
     print("in fetch");
 
-    var dataa = await db.list();
+    var dataa = await db.rev();
     currentDataLength = dataa.length;
     print("below data");
 
@@ -58,105 +59,130 @@ class _ReviewState extends State<Review> {
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 231, 217, 89),
+      //backgroundColor: Color.fromARGB(255, 231, 217, 89),
       appBar: AppBar(
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.backspace_outlined, color: Colors.black,
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(
+              Icons.backspace_outlined,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-         onPressed: (){
-             Navigator.pop(context);
-         },
-        ),
-        title: Text(
-          'Reviews',
-          style: GoogleFonts.tradeWinds(
-              color: Color.fromARGB(255, 12, 32, 49),
-              fontSize: 30,
-              fontWeight: FontWeight.w500),
-        ),
-        backgroundColor: Colors.white
-        //elevation: 0,
-      ),
+          title: Text(
+            'Reviews',
+            style: GoogleFonts.tradeWinds(
+                color: Color.fromARGB(255, 12, 32, 49),
+                fontSize: 30,
+                fontWeight: FontWeight.w500),
+          ),
+          backgroundColor: Colors.white
+          //elevation: 0,
+          ),
       body: ListView.builder(
         controller: _controller,
         itemCount: reviewList.length,
         itemBuilder: (BuildContext context, int index) {
-        return Container(
-          child: Padding(
-            padding: EdgeInsets.only( top: 15, left: 10, right: 8),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  FittedBox(
-                    child: Column(
-                      children: [
-                        CardList(
-                          text: "${reviewList[index].text1}",
-                          subtextt: "${reviewList[index].subtext1}",
-                          image:
-                              "${reviewList[index].image1}",
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        CardList(
-                          text: 'Harry', //"${aboutList[index].name}"
-                          subtextt: 'This place is very good and enjoyable',
-                          image:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQDhM3R9W_PCfzh0PFJtIbi7Po-N3oiWnEugQcZU7Zp8y52gaLNvnJmmkNZdzudt9-DbE&usqp=CAU",
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        CardList(
-                          text: 'Harry',
-                          subtextt: 'This place is very good and enjoyable',
-                          image:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaxMe2yElTGY488WR0L7uIkSWKXd9yCx1jnwLFvDXbvbDHMyupkKmcrpnU40q2YHh1uyY&usqp=CAU",
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        CardList(
-                          text: 'Harry',
-                          subtextt: 'This place is very good and enjoyable',
-                          image:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS13TsYIZYuW3MKPboL8oGKBtFd7w5zQq0UBISrXbW7XlV2xMM4zlwmIZhBrFt5bu0dCXs&usqp=CAU",
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        CardList(
-                          text: 'Harry',
-                          subtextt: 'This place is very good and enjoyable',
-                          image:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4GJpQd_Y-J40GBUwnnHSW2uknC2AGrRzc1gSpznd00iQwwAu0_4310AHW1M8Nr8mwHac&usqp=CAU",
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        CardList(
-                          text: 'Harry',
-                          subtextt: 'This place is very good and enjoyable',
-                          image:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR657Vfe6WMZ2Z-b6evuAjShGifx0udvpMOJGffnTSQOTL2E0bs82YFlsjxlhT707Nal14&usqp=CAU",
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                      ],
+          return Container(
+            child: Padding(
+              padding: EdgeInsets.only(top: 15, left: 8, right: 8),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Column(
+                  children: [
+                    FittedBox(
+                      child: Column(
+                        children: [
+                          CardList(
+                            text: "${reviewList[index].text1}",
+                            subtextt: "${reviewList[index].subtext1}",
+                            image: "${reviewList[index].image1}",
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          CardList(
+                            text: "${reviewList[index].text2}",
+                            subtextt: "${reviewList[index].subtext2}",
+                            image: "${reviewList[index].image2}",
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          CardList(
+                            text: "${reviewList[index].text3}",
+                            subtextt: "${reviewList[index].subtext3}",
+                            image: "${reviewList[index].image3}",
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          CardList(
+                            text: "${reviewList[index].text4}",
+                            subtextt: "${reviewList[index].subtext4}",
+                            image: "${reviewList[index].image4}",
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          CardList(
+                            text: "${reviewList[index].text5}",
+                            subtextt: "${reviewList[index].subtext5}",
+                            image: "${reviewList[index].image5}",
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          CardList(
+                            text: "${reviewList[index].text6}",
+                            subtextt: "${reviewList[index].subtext6}",
+                            image: "${reviewList[index].image6}",
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 15
+                    ),
+                    OutlinedButton(
+                      onPressed: () {}, 
+                      child: RichText(
+                            text: TextSpan(
+                            style: GoogleFonts.nunito(
+                              color: Colors.black,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            text: "View More Review",
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                var url =
+                                    "https://www.kimkim.com/d/nepal/trip-reviews/";
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              })),
+                      ),
+                       SizedBox(
+                      height: 15
+                    ),
+                  ],
+                  
+                ),
               ),
             ),
-          ),
-        );
+          );
         },
       ),
     );
@@ -173,33 +199,44 @@ class CardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.white,
+        color: Colors.black87,
         elevation: 10.0,
         borderRadius: BorderRadius.circular(24.0),
-        shadowColor: Color(0x802196F3),
+        shadowColor: Colors.blue,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
+              color: Colors.teal[400],
               child: Padding(
-                padding: EdgeInsets.only(left: 16.0),
+                padding: EdgeInsets.only(left: 10.0),
                 child: Column(
                   children: [
-                    Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 2),
+                      child: Text(
+                        text,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      subtextt,
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w300,
+                    Container(
+                      height: 200,
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Text(
+                          subtextt,
+                          style: GoogleFonts.nunito(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -207,15 +244,18 @@ class CardList extends StatelessWidget {
               ),
             ),
             Container(
-              width: 180,
-              height: 100,
+              width: 150,
+              height: 130,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(24.0),
                 child: Image.network(image,
-                    width: 20, height: 5, fit: BoxFit.contain),
+                    width: 20, height: 5,
+                     fit: BoxFit.contain),
               ),
             ),
           ],
-        ));
+          
+        ),
+        );
   }
 }

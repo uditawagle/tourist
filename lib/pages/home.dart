@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/components/hotels.dart';
 import 'package:tourguide/pages/about_us.dart';
+import 'package:tourguide/pages/booking.dart';
 import 'package:tourguide/pages/contact_us.dart';
 import 'package:tourguide/pages/destination.dart';
 import 'package:tourguide/pages/feedback.dart';
 import 'package:tourguide/pages/maplocation.dart';
-import 'package:tourguide/pages/userpage.dart';
+import 'package:tourguide/pages/review.dart';
 import 'package:tourguide/pages/weather.dart';
+import 'package:tourguide/pages/welcomepage.dart';
+import 'package:tourguide/worldclock.dart/load.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,12 +38,6 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
-          // decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //       image: AssetImage("assets/logo/back.jpg"),
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
           child: Padding(
             padding: const EdgeInsets.only(top: 90, left: 50, right: 50),
             child: Column(
@@ -105,6 +102,21 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 15,
                 ),
+                 ImageWidget(
+                  title: 'World Clock',
+                  onpress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Loading()),
+                    );
+                  },
+                  image: NetworkImage(
+                    'https://media.istockphoto.com/vectors/world-time-zones-vector-id455437783?k=6&m=455437783&s=170667a&w=0&h=uyapWAbhws2P9LlvURqLgj-Q14xDYWk8b8zEduqoT4k=',
+                  ),
+                ),
+                SizedBox(
+                  height: 15, 
+                ),
                 ImageWidget(
                   title: 'About Us',
                   onpress: () {
@@ -157,10 +169,10 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text('umi'),
-                accountEmail: Text('umi@gmail.com'),
+                accountName: Text('Tour Guide'),
+                accountEmail: Text('tourguide@gmail.com'),
                 currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
+                  child: Image.network('https://thumbs.dreamstime.com/b/brown-hair-businessman-avatar-man-face-profile-icon-concept-online-support-service-male-cartoon-character-portrait-brown-hair-126956775.jpg')
                 ),
               ),
               Newlist(
@@ -175,20 +187,38 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.home,
               ),
               Newlist(
-                press: () {},
-                title: 'Weather',
+                press: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => BookingScreen(),
+                    ),
+                  );
+                },
+                title: 'Booking',
                 icon: Icons.dashboard,
               ),
               Divider(
                 color: Colors.black,
               ),
               Newlist(
-                press: () {},
-                title: 'Setting',
-                icon: Icons.settings_remote,
+                press: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Review(),
+                    ),
+                  );
+                },
+                title: 'Review',
+                icon: Icons.rate_review,
               ),
               Newlist(
-                press: () {},
+                press: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AboutUs(),
+                    ),
+                  );
+                },
                 title: 'About Us',
                 icon: Icons.help,
               ),
@@ -196,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                 press: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => Body(),
+                      builder: (context) => WelcomePage(),
                     ),
                   );
                 },

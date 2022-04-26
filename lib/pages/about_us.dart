@@ -198,7 +198,7 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                 ),
               ),
-            )
+            ),
           ]);
         },
       ),

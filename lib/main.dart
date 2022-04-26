@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tourguide/components/hotelyakyeti.dart';
-import 'package:tourguide/pages/about_us.dart';
-import 'package:tourguide/pages/review.dart';
+import 'package:tourguide/Screen/splash.dart';
+import 'package:tourguide/pages/loginpage.dart';
+import 'package:tourguide/worldclock.dart/chooselocation.dart';
+import 'package:tourguide/worldclock.dart/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       //home: SplashScreen(),
-      home: Review(),
+      home: Login(),
+      routes: {
+      '/home': (context) => const Home(),
+      '/location':(context) => const ChooseLocation(),
+    },
     );
   }
 }

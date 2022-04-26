@@ -1,12 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/pages/home.dart';
 import 'package:tourguide/pages/loginpage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -57,7 +58,9 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: size.height * 0.04),
+               SizedBox(
+                 height: 20,
+               ),
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.symmetric(horizontal: 40),
@@ -81,15 +84,9 @@ class RegisterScreen extends StatelessWidget {
                         ),
                   ),
                 ),
-                // SizedBox(height: size.height * 0.03),
-                // Container(
-                //   alignment: Alignment.center,
-                //   margin: EdgeInsets.symmetric(horizontal: 40),
-                //   child: TextField(
-                //     decoration: InputDecoration(labelText: "Username"),
-                //   ),
-                // ),
-                SizedBox(height: size.height * 0.04),
+              SizedBox(
+                height: 12
+              ),
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.symmetric(horizontal: 40),
@@ -113,7 +110,9 @@ class RegisterScreen extends StatelessWidget {
                         ),
                   ),
                 ),
-                SizedBox(height: size.height * 0.04),
+                 SizedBox(
+                height: 12
+              ),
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.symmetric(horizontal: 40),
@@ -138,7 +137,9 @@ class RegisterScreen extends StatelessWidget {
                     obscureText: true,
                   ),
                 ),
-                SizedBox(height: size.height * 0.07),
+                 SizedBox(
+                height: 12
+              ),
                 Container(
                   alignment: Alignment.centerRight,
                   margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -174,10 +175,10 @@ class RegisterScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => LoginScreen()))
+                            MaterialPageRoute(builder: (context) => Login()))
                       },
                       child: Text(
-                        "Already Have an Account?? Login",
+                        "Already Have an Account? Login",
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
@@ -198,7 +199,7 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              Button1(
+             Button1(
                 link: "https://www.facebook.com/",
                 title: "Login With Facebook",
                 icon: Icons.facebook,
@@ -211,6 +212,9 @@ class RegisterScreen extends StatelessWidget {
                 title: "Login With Google",
                 icon: Icons.g_mobiledata_outlined,
               ),
+              SizedBox(
+                height: 20,
+              ),
               ],
             ),
           ),
@@ -219,3 +223,49 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 }
+
+
+class Button1 extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final String link;
+
+  Button1({required this.title, required this.icon, required this.link});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      style: TextButton.styleFrom(
+        minimumSize: Size(250, 50),
+        primary: Colors.black,
+        backgroundColor: Color.fromARGB(255, 89, 125, 141),
+        shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+      ),
+      icon: Icon(
+        icon,
+        color: Colors.white,
+        size: 35,
+      ),
+      onPressed: () {},
+      label: RichText(
+          text: TextSpan(
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+              text: title,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () async {
+                  var url = link;
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                })),
+    );
+  }
+}
+

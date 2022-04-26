@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/components/detailshotel.dart';
-import 'package:tourguide/components/hotelyakyeti.dart';
+import 'package:tourguide/components/hoteldetails.dart';
 import 'package:tourguide/pages/destination.dart';
 
 class Hotels extends StatefulWidget {
@@ -245,7 +245,7 @@ class _HotelsState extends State<Hotels> {
                 text: 'Hotel Encounter Nepal & Spa',
                 subtext: 'Thamel, Kathmandu',
                 ptext:
-                    'Hotel Encounter Nepal & Spa is a Nepalese character hotel on the northern edge of Thamel with Low rates Multilingual Staff, online Services, Free cancelation, 100% verified reviews',
+                    'Hotel Encounter is a Nepalese character hotel on the northern edge of Thamel with Low rates Multilingual Staff, online Services, Free cancelation.',
               ),
               SizedBox(
                 height: 5,
