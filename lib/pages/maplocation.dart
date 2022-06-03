@@ -36,7 +36,6 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unnecessary_new
     return new Scaffold(
       appBar: AppBar(
         centerTitle: true,

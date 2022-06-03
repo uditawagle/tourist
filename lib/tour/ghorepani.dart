@@ -2,15 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
+class PoolHill extends StatefulWidget {
+  const PoolHill({Key? key}) : super(key: key);
 
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<PoolHill> createState() => _PoolHillState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _PoolHillState extends State<PoolHill> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -33,9 +34,9 @@ class _EverestDetailState extends State<EverestDetail> {
         controller: _pageController,
         children: [
           Details(
-            image: 'assets/travel/Everest.jpg',
+            image: 'assets/people/poolhill.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image: 'assets/people/poonhillpeople.jpg'),
         ],
       ),
     );
@@ -87,26 +88,17 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
-                      PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
-                      PlaceDetail(
-                          text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
-                      PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                      PlaceDetail(text: 'Start-finish: Tikhedhunga-Nayapul'),
+                      PlaceDetail(text: 'Altitude: 3210 m / at Poon Hill'),
+                      PlaceDetail(text: 'Activity: City Sightseeing / Trekking'),
+                      PlaceDetail(text: 'Grade: Leisurely to Moderate'),
+                      PlaceDetail(text: 'Trip Cost:  dollar 860.USD'),
+                      PlaceDetail(text: 'Best Months: Sept-Dec and Mar-May'),
+                      PlaceDetail(text: 'Group Size: 01 to 30'),
+                      PlaceDetail(text: 'Land transportation: Private Car / Van / Hiace'),
+                      PlaceDetail(text: 'Trek Duration: 7-8 days'),
+                      PlaceDetail(text: 'Accommodation: 3star hotels in the cities and tea-houses during the trek'),
+                      PlaceDetail(text: 'Flight: Kathmandu - Pokhara - Kathmandu'),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,7 +149,7 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Ghorepani Poonhill Trek',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -179,7 +171,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'Myagdi District, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -217,7 +209,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'Ghorepani Poon Hill trek is one of the most popular trekking trails in the Annapurna region, as this trekking takes you to the Ghorepani Poon hill that gives magnificent views of the Himalayas lying in the Annapurna area and beautiful Gurung and Magar ethnic groups village and Rhododendron forests and unbelievable snow-capped mountain views. Ghorepani Poon hill trek is suitable for those who have limited holidays but want to have a view of the Annapurna Himalaya range within a brief period.',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +231,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                    "https://www.mountainguidetrek.com/ghorepani-poon-hill-trek.html";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +247,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

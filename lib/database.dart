@@ -277,25 +277,26 @@ class DatabaseService{
   }
 
 //for login 
-Future<int> insertlogin(String email, String password) async {
+Future<int> insertlogin(String emails, String passwords) async {
    var data = await http.get(
-     Uri.parse("$BASE_URL/api/insertlogin?email=${email}&password=${password}"),
+     Uri.parse("$BASE_URL/api/insertlogin?email=${emails}&password=${passwords}"),
    );
-
     var jsonData = json.decode((data.body));
-
-    email = jsonData[0]['email'];
-    print(email);
-
+    emails = jsonData[0]['email'];
+    print(emails);
     return data.statusCode;
   }
 
+
 //for signup
-Future<int> insertRegistration(String name, String email, String password, String cpassword) async {
- 
+Future<int> insertRegistration(String name, String email, String password) async {
     var data = await http.get(
-      Uri.parse("$BASE_URL/api/signup?name=${name}&email=${email}&password=${password}&cpassword=${cpassword}"),
+      Uri.parse("$BASE_URL/api/insertsignup?name=${name}&email=${email}&password=${password}"),
     );
+    print(email);
+    print(name);
+    print(password);
+    print('aayo');
     int code = data.statusCode;
     var jsonData = json.decode((data.body));
     String? val = jsonData["error"];
@@ -308,5 +309,6 @@ Future<int> insertRegistration(String name, String email, String password, Strin
 
 
 }
+
 
 

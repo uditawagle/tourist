@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tourguide/classs/booking.dart';
 import 'package:tourguide/classs/hotelyak.dart';
 import 'package:tourguide/classs/karnali.dart';
 import 'package:tourguide/classs/ktmguest.dart';

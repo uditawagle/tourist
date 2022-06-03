@@ -2,15 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
+class ChoOuy extends StatefulWidget {
+  const ChoOuy({Key? key}) : super(key: key);
 
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<ChoOuy> createState() => _ChoOuyState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _ChoOuyState extends State<ChoOuy> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -32,10 +33,10 @@ class _EverestDetailState extends State<EverestDetail> {
       body: PageView(
         controller: _pageController,
         children: [
-          Details(
-            image: 'assets/travel/Everest.jpg',
+          Details( 
+            image: 'assets/travel/chooyu.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image:'assets/people/manaslupeople.jpg'),
         ],
       ),
     );
@@ -87,26 +88,15 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
-                      PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
-                      PlaceDetail(
-                          text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
-                      PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                      PlaceDetail(text: 'Elevation: 8,188 m (26,864 ft)'),
+                      PlaceDetail(text: 'Prominence:	2,340 m (7,680 ft)'),
+                      PlaceDetail(text: 'Isolation:	29 km (18 mi) '),
+                      PlaceDetail(text: 'Listing: Eight-thousander Ultra'),
+                      PlaceDetail(text: 'English translation: Turquoise Goddess'),
+                      PlaceDetail(text: 'Language of name: Tibetan'),
+                      PlaceDetail(text: 'Parent range: Mahalangur Himal, Himalayas'),
+                      PlaceDetail(text: 'Easiest route: snow/ice/glacier climb'),
+                      PlaceDetail(text: 'Coordinates: 28°05′39″N 86°39′39″E'),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,7 +147,7 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Mt. Cho Oyu',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -179,7 +169,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'Province no: 1, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -217,7 +207,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'Mount Cho Oyu is the world’s sixth highest mountain. In the Tibetan language Cho Oyu means “Turquoise Goddess”. This is the westernmost major peak in the Khumbu Sub region along the Mahalangur range. Cho Oyu stands on the border between Nepal and China. The peak lies in the Mahalangur sub range of the Nepal Himalayas. It is located in the Khumjung Village Development Committees under Khumbu Pasang Lhamu rural municipality in the Solukhumbu District of Eastern Nepal. It elevates to a height of 8,201 m or 26,906 feet. The nearest settlement to Mount Cho Oyu is in Gokyo. The nearest army, police and health posts to the peak are in Namche which is at a distance of 22.0 km.',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +229,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                    "https://nepalhimalpeakprofile.org/cho-oyu";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +245,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

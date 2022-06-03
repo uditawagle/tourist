@@ -2,15 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
+class ManasluTrek extends StatefulWidget {
+  const ManasluTrek({Key? key}) : super(key: key);
 
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<ManasluTrek> createState() => _ManasluTrekState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _ManasluTrekState extends State<ManasluTrek> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -33,9 +34,9 @@ class _EverestDetailState extends State<EverestDetail> {
         controller: _pageController,
         children: [
           Details(
-            image: 'assets/travel/Everest.jpg',
+            image: 'assets/people/manaslu.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image: 'assets/people/manaslupeople.jpg'),
         ],
       ),
     );
@@ -87,26 +88,16 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
-                      PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
-                      PlaceDetail(
-                          text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
-                      PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                      PlaceDetail(text: 'Starts at: Soti Khola'),
+                      PlaceDetail(text: 'Max Altitude: 5167 m / 16752 ft (Larkya Pass)'),                     
+                      PlaceDetail(text: 'Trip Grade: Challenging'),
+                      PlaceDetail(text: 'Trip Cost:  dollar 926 USD'),
+                      PlaceDetail(text: 'Transport: Public Bus'),
+                      PlaceDetail(text: 'Duration: 14-15 days'),
+                      PlaceDetail(text: 'Group of: 2-30 '),
+                      PlaceDetail(text: 'Accomodation: Basic teahouses'),
+                      PlaceDetail(text: 'Ends at: Dharapani'),
+                      PlaceDetail(text: 'Max. elevation: 5,106 m / 16,752 ft (Larkya La pass)'),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,7 +148,7 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Manaslu Circuit Trek',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -179,7 +170,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'Larkya Bhanjyang, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -217,7 +208,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'Manaslu Circuit Trek among the best treks in Nepal. Friendly people, rich culture of the region which includes both Nepalese & Tibetan ethnic groups.Abundant wildlife including Tahr, Agali, Pika, Himalayan Marmots, if lucky Snow Leopard. Despite its recent rise in popularity, the Manaslu Trek remains remote and off-the-beaten-path compared to the better-known teahouse treks in Nepal. Solo trekkers are also not allowed, where a minimum group size of two people is required. The trek takes you around Manaslu, the worlds eighth highest mountain at 8,163 meters (26,781 ft). ',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +230,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                    "https://www.magicalnepal.com/trip/manaslu-circuit-trek/";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +246,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

@@ -2,15 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
+class UppersetiRiver extends StatefulWidget {
+  const UppersetiRiver({Key? key}) : super(key: key);
 
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<UppersetiRiver> createState() => _UppersetiRiverState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _UppersetiRiverState extends State<UppersetiRiver> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -33,9 +34,9 @@ class _EverestDetailState extends State<EverestDetail> {
         controller: _pageController,
         children: [
           Details(
-            image: 'assets/travel/Everest.jpg',
+            image: 'assets/travel/setirafting.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image:'assets/people/setiriver.jpg'),
         ],
       ),
     );
@@ -87,26 +88,15 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
-                      PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
-                      PlaceDetail(
-                          text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
-                      PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                      PlaceDetail(text: 'River distance: Around 1.8 km'),
+                      PlaceDetail(text: 'River Grade: IV'),
+                      PlaceDetail(text: 'Trip Difficulty: Moderate'),
+                      PlaceDetail(text: 'Price: 4100 per person'),
+                      PlaceDetail(text: 'Best Seasons: Oct-Dec. and March-May'),
+                      PlaceDetail(text: 'Rafting Start Point: Bamboo Bridge / 30 minutes from Lakeside'),
+                      PlaceDetail(text: 'Rafting finish Point:  Dam / 20 minutes to Lakeside'),
+                      PlaceDetail(text: 'Time: 9.00 Am & 1.00 Pm'),
+                      PlaceDetail(text: 'Departure: Pkhara Lake Side'),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,7 +147,7 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Upper Seti River Rafting',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -179,7 +169,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'Pokhara, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -217,7 +207,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'Upper Seti rafting is short and sweet one day white water rafting package from pokhara. Upper Seti River is one of the best destination for sweet, short and loving rafting in Nepal. This rafting experience will be of 1 and half hour and is of 5kms ride which is easily accessible from Pokhara city within 30 minutes. This rafting experience attars from the bamboo bridge near Mardi and will end at the Yamdi Bridge Dam. Due to this short and sweet ride it is most suitable to those who have limited time yet adventure seeker or have free and vacant time to enjoy the place. ',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +229,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                    "https://www.gracefuladventure.com/upper-seti-river-rafting.html";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +245,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

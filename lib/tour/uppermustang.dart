@@ -2,15 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
+class MustangTrek extends StatefulWidget {
+  const MustangTrek({Key? key}) : super(key: key);
 
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<MustangTrek> createState() => _MustangTrekState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _MustangTrekState extends State<MustangTrek> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -33,9 +34,9 @@ class _EverestDetailState extends State<EverestDetail> {
         controller: _pageController,
         children: [
           Details(
-            image: 'assets/travel/Everest.jpg',
+            image: 'assets/people/mustang.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image: 'assets/people/upperpeople.jpg'),
         ],
       ),
     );
@@ -87,26 +88,15 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
-                      PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
-                      PlaceDetail(
-                          text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
-                      PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                      PlaceDetail(text: 'Starts at: Jomsom'),
+                      PlaceDetail(text: 'Max Altitude: 4010 m / 13156 ft (Nyi La Pass)'),                          
+                      PlaceDetail(text: 'Trip Grade: Moderate'),
+                      PlaceDetail(text: 'Trip Cost:  dollar 1615 USD'),
+                      PlaceDetail(text: 'Transport: Flight'),
+                      PlaceDetail(text: 'Duration: 14- 15 days'),
+                      PlaceDetail(text: 'Accomodation: Teahouses'),
+                      PlaceDetail(text: 'Ends at: Jomsom'),
+                      PlaceDetail(text: 'Max. elevation: 3820m (Lo Manthang) '),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,7 +147,7 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Upper Mustang Trek',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -179,7 +169,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'North of Annapurna, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -217,7 +207,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'The Upper Mustang trek winds its way to the hidden Buddhist world of the Kingdom of Mustang, also known as Lo. This remote trans-Himalayan mountain area borders Tibet. Spiritual feel walking through many Gompas, chortens, flapping prayer flags, and caves. Breathe the spirituality of the Tibetan like people and monks with their prayer flags. Walk back to the history of Lo Manthang after exploring the palace of king. Lying in the rain shadow of the Himalaya, and officially one of Nepals restricted regions, this trek is known for its desert beauty and harsh, cliff-faced landscapes.',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +229,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                  "https://www.magicalnepal.com/trip/upper-mustang-trek/";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +245,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

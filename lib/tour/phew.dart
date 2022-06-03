@@ -2,15 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
-
+class PhewaLake extends StatefulWidget {
+  const PhewaLake({Key? key}) : super(key: key);
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<PhewaLake> createState() => _PhewaLakeState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _PhewaLakeState extends State<PhewaLake> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -33,9 +33,9 @@ class _EverestDetailState extends State<EverestDetail> {
         controller: _pageController,
         children: [
           Details(
-            image: 'assets/travel/Everest.jpg',
+            image: 'assets/travel/phewa.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image: 'assets/people/phewapeople.jpg'),
         ],
       ),
     );
@@ -87,26 +87,21 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
+                      PlaceDetail(text: 'Location: Kaski'),
+                      PlaceDetail(text: 'Altitude: 742 m (2,434 ft)'),
+                      PlaceDetail(text: 'Lake type: Freshwater'),
                       PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
+                          text: 'Catchment area:	122.53 km2 (47.31 sq mi)'),
                       PlaceDetail(
                           text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
+                              'Primary inflows:	Harpan, Adheri khola & Phirke Khola'),
+                      PlaceDetail(text: 'Max. depth:	24 m (79 ft)'),
+                      PlaceDetail(text: 'Max. length:	4 km (2.5 mi)'),
+                      PlaceDetail(text: 'Average depth:	8.6 m (28 ft)'),
+                      PlaceDetail(text: 'Surface area: 5.7260 km2 (2.2 sq mi)'),
+                      PlaceDetail(text: 'Surface elevation: 742 m (2,434 ft)'),
                       PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                          text: 'Water Volume: 0.046 km3 (0.011 cu mi)'),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,7 +152,7 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Phewa Lake',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -179,7 +174,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'Pokhara, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -196,14 +191,14 @@ class Details extends StatelessWidget {
                             color: Colors.yellow,
                           ),
                           StarWidget(
-                            color: Colors.yellow,
+                            color: Colors.white,
                           ),
                           SizedBox(
                             width: 2,
                             height: 4,
                           ),
                           Text(
-                            '5.0',
+                            '4.0',
                             style: TextStyle(
                               color: Colors.white70,
                             ),
@@ -217,7 +212,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'Phewa Lake is the second largest lake in Nepal. It is a semi-natural freshwater lake enveloped by rani ban or queens forest and stunning reflection of the Annapurna and Dhaulagiri mountain ranges in the clear lake waters. It is also a perfect place to experience the ever so glorious Himalayan sunrises. It has some religious significance too as it is known for the sacred Tal Barahi Temple located on an island in the lake. Baidam or lakeside of Pokhara on the eastern part has some amazing lodges, restaurants, cafes and bookshops.',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +234,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                    "https://en.wikipedia.org/wiki/Phewa_Lake";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +250,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

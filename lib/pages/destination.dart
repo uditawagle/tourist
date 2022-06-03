@@ -82,20 +82,20 @@ class _DestinationState extends State<Destination> {
                           // );
                         },
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/Mustang.jpg',
-                        text: 'Mustang',
-                        press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => DestinationDetail()),
-                          // );
-                        },
-                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // ImagePlace(
+                      //   images: 'assets/travel/Mustang.jpg',
+                      //   text: 'Mustang',
+                      //   press: () {
+                      //     // Navigator.push(
+                      //     //   context,
+                      //     //   MaterialPageRoute(
+                      //     //       builder: (context) => DestinationDetail()),
+                      //     // );
+                      //   },
+                      // ),
                       SizedBox(
                         width: 20,
                       ),
@@ -138,20 +138,20 @@ class _DestinationState extends State<Destination> {
                           // );
                         },
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/sarangkot.jpg',
-                        text: 'Sarangkot',
-                        press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => DestinationDetail()),
-                          // );
-                        },
-                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // ImagePlace(
+                      //   images: 'assets/travel/sarangkot.jpg',
+                      //   text: 'Sarangkot',
+                      //   press: () {
+                      //     // Navigator.push(
+                      //     //   context,
+                      //     //   MaterialPageRoute(
+                      //     //       builder: (context) => DestinationDetail()),
+                      //     // );
+                      //   },
+                     // ),
                       SizedBox(
                         width: 20,
                       ),
@@ -282,14 +282,14 @@ class _DestinationState extends State<Destination> {
                         text: ' Pashupatinath \nTemple',
                         press: () {},
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/guhyeshwari.jpg',
-                        text: '  Guhyeshwari \nTemple',
-                        press: () {},
-                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // ImagePlace(
+                      //   images: 'assets/travel/guhyeshwari.jpg',
+                      //   text: '  Guhyeshwari \nTemple',
+                      //   press: () {},
+                      // ),
                       SizedBox(
                         width: 20,
                       ),
@@ -352,14 +352,14 @@ class _DestinationState extends State<Destination> {
                         text: 'Chitwan \nNational \nPark.',
                         press: () {},
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/bardiya.jpg',
-                        text: 'Bardiya \nNational \nPark.',
-                        press: () {},
-                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // ImagePlace(
+                      //   images: 'assets/travel/bardiya.jpg',
+                      //   text: 'Bardiya \nNational \nPark.',
+                      //   press: () {},
+                      // ),
                       SizedBox(
                         width: 20,
                       ),
@@ -419,14 +419,14 @@ class _DestinationState extends State<Destination> {
                         text: 'Marshyangdi \nRiver \nRafting \nTour',
                         press: () {},
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/sunkosi.jpg',
-                        text: 'Sun Kosi \nRiver \nRafting \nTour',
-                        press: () {},
-                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // ImagePlace(
+                      //   images: 'assets/travel/sunkosi.jpg',
+                      //   text: 'Sun Kosi \nRiver \nRafting \nTour',
+                      //   press: () {},
+                      // ),
                       SizedBox(
                         width: 20,
                       ),
@@ -435,14 +435,14 @@ class _DestinationState extends State<Destination> {
                         text: 'Trisuli \nRiver \nRafting \nTour',
                         press: () {},
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/bhotekoshi.jpg',
-                        text: 'Bhote \nKoshi \nRiver \nRafting \nTour',
-                        press: () {},
-                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // ImagePlace(
+                      //   images: 'assets/travel/bhotekoshi.jpg',
+                      //   text: 'Bhote \nKoshi \nRiver \nRafting \nTour',
+                      //   press: () {},
+                      // ),
                     ],
                   ),
                 ),
@@ -529,22 +529,22 @@ class _DestinationState extends State<Destination> {
                         text: 'Rara Lake',
                         press: () {},
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/sheypokshundo.jpg',
-                        text: 'Shey-Pokshundo \nLake',
-                        press: () {},
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/tiliho.jpg',
-                        text: 'Tilicho \nLake',
-                        press: () {},
-                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // ImagePlace(
+                      //   images: 'assets/travel/sheypokshundo.jpg',
+                      //   text: 'Shey-Pokshundo \nLake',
+                      //   press: () {},
+                      // ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // ImagePlace(
+                      //   images: 'assets/travel/tiliho.jpg',
+                      //   text: 'Tilicho \nLake',
+                      //   press: () {},
+                      // ),
                       SizedBox(
                         width: 20,
                       ),

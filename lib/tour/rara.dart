@@ -2,15 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
-
+class RaraLake extends StatefulWidget {
+  const RaraLake({Key? key}) : super(key: key);
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<RaraLake> createState() => _RaraLakeState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _RaraLakeState extends State<RaraLake> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -33,9 +33,9 @@ class _EverestDetailState extends State<EverestDetail> {
         controller: _pageController,
         children: [
           Details(
-            image: 'assets/travel/Everest.jpg',
+            image: 'assets/travel/rara.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image: 'assets/people/thumb.jpg'),
         ],
       ),
     );
@@ -87,26 +87,17 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
-                      PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
-                      PlaceDetail(
-                          text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
-                      PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                      PlaceDetail(text: 'Location: Mugu District, Karnali Province'),
+                      PlaceDetail(text: 'Max. length: 5.1 km (3.2 mi)'),
+                      PlaceDetail(text: 'Max. width: 2.7 km (1.7 mi)'),
+                      PlaceDetail(text: 'Average depth:	100 m (330 ft)'),
+                      PlaceDetail(text: 'Primary inflows:	small rivulets'),
+                      PlaceDetail(text: 'Elevation: 2,990 m (9,810 ft)'),
+                      PlaceDetail(text: 'Primary outflows:	Nijar River'),
+                      PlaceDetail(text: 'Surface area: 1,061 ha (2,620 acres)'),
+                      PlaceDetail(text: 'Surface elevation: 2,990 m (9,810 ft)'),
+                      PlaceDetail(text: 'Max. depth:	167 m (548 ft)'),
+                      PlaceDetail(text: 'Water Surface: 10.8 km2 (4.2 sq mi)'),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,7 +148,7 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Rara Lake',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -179,7 +170,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'Mugu District, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -196,14 +187,14 @@ class Details extends StatelessWidget {
                             color: Colors.yellow,
                           ),
                           StarWidget(
-                            color: Colors.yellow,
+                            color: Colors.white,
                           ),
                           SizedBox(
                             width: 2,
                             height: 4,
                           ),
                           Text(
-                            '5.0',
+                            '4.0',
                             style: TextStyle(
                               color: Colors.white70,
                             ),
@@ -217,7 +208,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'Rara Lake is the biggest fresh water lake in the Nepalese Himalayas. It is the main feature of Rara National Park, located in Jumla and Mugu Districts of Karnali Province.[1] In September 2007, it was declared a Ramsar site, covering 1,583 ha (6.11 sq mi) including the surrounding wetland.[3] Rara National Park total area is 106 km2 (41 sq mi). Rara Lake, being surrounded by Rara National Park, has unique floral and faunal importance with rare and vulnerable species. The park was established in 1976 to preserve the beauty of the lake and protect it from sedimentation and adverse human activities.',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +230,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                    "https://en.wikipedia.org/wiki/Rara_Lake";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +246,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

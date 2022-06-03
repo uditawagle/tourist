@@ -2,15 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
+class NarPhu extends StatefulWidget {
+  const NarPhu({Key? key}) : super(key: key);
 
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<NarPhu> createState() => _NarPhuState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _NarPhuState extends State<NarPhu> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -33,9 +34,9 @@ class _EverestDetailState extends State<EverestDetail> {
         controller: _pageController,
         children: [
           Details(
-            image: 'assets/travel/Everest.jpg',
+            image: 'assets/people/narphu.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image: 'assets/people/narphupeople.jpg'),
         ],
       ),
     );
@@ -87,26 +88,17 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
-                      PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
-                      PlaceDetail(
-                          text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
-                      PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                      PlaceDetail(text: 'Starts and Ends at: Kathmandu'),
+                      PlaceDetail(text: 'Max Altitude: 5320m at Kang-La pass '),
+                      PlaceDetail(text: 'Group Size: 2-30'),
+                      PlaceDetail(text: 'Difficulty: Challeging'),
+                      PlaceDetail(text: 'Trip Cost: dollar 1179 USD'),
+                      PlaceDetail(text: 'Activity: Annapurna Treks'),
+                      PlaceDetail(text: 'Best Season: Feb, Mar, Apri, May, June, Sep, Oct, Nov & Dec'),
+                      PlaceDetail(text: 'Nature Of Trek: Lodge, Camping'),
+                      PlaceDetail(text: 'Transport: Kathmandu to Jagat, Jomsom to Tatopani, Tatopani to Pokhara by Public Transportation, Pokhara to Kathmandu on a Tourist Bus.'),
+                      PlaceDetail(text: 'Duration: 15-16 days'),
+                      PlaceDetail(text: 'Accomodation: Hotel in Pokhara, & \nHotel/Lodge/Tea House/Camping during trek '),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,14 +149,14 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Nar Phu Valley Trek',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -179,7 +171,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'Between Damodar Kunda \nand Annapurna Circuit, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -217,7 +209,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'Nar Phu valley trek takes you across several high passes, picturesque villages, dense forests, ancient monasteries, and narrow canyons to remote Nar and Phu villages near Tibet. As the trek progresses, you will find yourself among the worlds rare wilderness, past impressive chortens, and herds of blue sheep. After visiting the Nar Phu Valley, you will be rejoining Annapurna Circuit trails. Nar Phu trek is one of Nepals most untouched and beautiful regions. Nar Phu Valley Trek will begin with an 8-9 hour local bus ride from Kathmandu to Besisahar, Bhulbhule, or Jagat (approx. 172.9 km).',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +231,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                    "https://www.discoveryworldtrekking.com/trips/nar-phu-valley-trek";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +247,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

@@ -2,15 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../components/everest.dart';
 
-class EverestDetail extends StatefulWidget {
-  const EverestDetail({Key? key}) : super(key: key);
+class SheyNP extends StatefulWidget {
+  const SheyNP({Key? key}) : super(key: key);
 
   @override
-  State<EverestDetail> createState() => _EverestDetailState();
+  State<SheyNP> createState() => _SheyNPState();
 }
 
-class _EverestDetailState extends State<EverestDetail> {
+class _SheyNPState extends State<SheyNP> {
   late PageController _pageController;
 
   void _onScroll() {}
@@ -32,10 +33,10 @@ class _EverestDetailState extends State<EverestDetail> {
       body: PageView(
         controller: _pageController,
         children: [
-          Details(
-            image: 'assets/travel/Everest.jpg',
+          Details( 
+            image: 'assets/travel/sheyphoksundo.jpg',
           ),
-          PeopleDetails(image: 'assets/people/everestpeople.jpg'),
+          PeopleDetails(image:'assets/people/chit.jpg'),
         ],
       ),
     );
@@ -87,26 +88,12 @@ class PeopleDetails extends StatelessWidget {
                       SizedBox(
                         height: 17,
                       ),
-                      PlaceDetail(
-                          text: 'Earths Highest Mountain Above Sea Level'),
-                      PlaceDetail(text: 'Province: Province No.1'),
-                      PlaceDetail(text: 'Height: 8,848.86 m (29,031.7 ft)'),
-                      PlaceDetail(text: 'Border Between: Nepal and China'),
-                      PlaceDetail(
-                          text: 'First Nepali Climber: Pasang Lhamu Sherpa'),
-                      PlaceDetail(
-                          text:
-                              'First Climber: Tenzing Norgay and Edmund Hillary'),
-                      PlaceDetail(
-                          text: 'Parent Range: Mahalangur Himal, Himalayas'),
-                      PlaceDetail(
-                          text:
-                              'Latitude and Longitude: 27.9881° N, 86.9250° E '),
-                      PlaceDetail(text: 'Currency: Nepali Rupee '),
-                      PlaceDetail(
-                          text:
-                              'Temperature Ranges: Average −33 °F (−36 °C) and can drop as low as −76 °F (−60 °C).'),
-                      PlaceDetail(text: 'People: Sherpa'),
+                      PlaceDetail(text: 'Established: 1984'),
+                      PlaceDetail(text: 'Area: 3,555 km2 (1,373 sq mi)'),
+                      PlaceDetail(text: 'Buffer Zone (sq.km.): 1349.00'),
+                      PlaceDetail(text: 'Type: National Park'),
+                      PlaceDetail(text: 'Governing body:	Department of National Parks and Wildlife Conservation'),
+                      PlaceDetail(text: 'Coordinates: 29°21′29″N 82°50′44″E'),
                       SizedBox(
                         height: 25,
                       ),
@@ -157,7 +144,7 @@ class Details extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Mount Everest',
+                      'Shey-phoksundo National Park',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -179,7 +166,7 @@ class Details extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            'Solukhumbu District, Nepal',
+                            'SheyPhoksundo, Nepal',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                           SizedBox(width: 40),
@@ -217,7 +204,7 @@ class Details extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 2, left: 2),
                       child: Text(
-                        'Mount Everest is a peak in the Himalaya mountain range. It is located between Nepal and Tibet. The height of Mount Everest is 8,849 m. Sherpa people is often used to mean mountain guide, though it actually refers to an ethnic group. Climbing Mount Everest has become a popular expedition for mountain climbers. However, Mount Everest is a dangerous and requires a lot of experience mountaineering elsewhere, as well as a certificate of good health, equipment, and a trained Nepalese guide.',
+                        'Shey-phoksundo National Park is situated in the Trans-Himalayan region of northwest Nepal. It is Nepal’s largest National Park covering an area of 3,555 km2. It was established in 1984 to preserve a unique Trans-Himalayan ecosystem with a diversity of flora and fauna. The Park’s climatic differences, altitude variations, and different zoo-geographical regions support a diverse range of biotic systems. In 1998, an area of 1349 km2 surrounding the park was declared as buffer zone, which consists of forests and private lands. The buffer zone is jointly managed by the park and local communities. Together they initiate community development activities and manage the natural and cultural resources.',
                         style: GoogleFonts.nunito(
                           color: Colors.white.withOpacity(1),
                           height: 1.5,
@@ -239,7 +226,7 @@ class Details extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 var url =
-                                    "https://www.nationalgeographic.org/encyclopedia/mount-everest/";
+                                    "https://dnpwc.gov.np/en/conservation-area-detail/71/";
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -255,45 +242,5 @@ class Details extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class StarWidget extends StatelessWidget {
-  final Color color;
-  StarWidget({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 3),
-      child: Icon(
-        Icons.star,
-        color: color,
-        size: 18,
-      ),
-    );
-  }
-}
-
-
-class PlaceDetail extends StatelessWidget {
-  final String text;
-
-  PlaceDetail({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 2, left: 2),
-      child: Text(
-        text,
-        style: GoogleFonts.nunito(
-          color: Color.fromARGB(255, 248, 248, 248).withOpacity(1),
-          height: 1.5,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }
