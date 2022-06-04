@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:tourguide/database.dart';
 
 class BookingScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 30, left: 5, right: 5, bottom: 5),
+        padding: const EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -55,7 +56,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     child: AnimatedTextKit(
                       animatedTexts: [
                         TyperAnimatedText(
-                          'Book - Sit - Relax - Enjoy',
+                          'Book - Sit - Relax & Enjoy',
                           textStyle: TextStyle(
                             color: Color.fromARGB(255, 59, 6, 28),
                             fontWeight: FontWeight.w500,
@@ -66,10 +67,10 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 23,
+                    height: 33,
                   ),
                   Text(
-                    'Where:',
+                    'Where do you wanna go?',
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
@@ -103,7 +104,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
                   Text(
                     'Check-In:',
@@ -117,36 +118,28 @@ class _BookingScreenState extends State<BookingScreen> {
                     width: 250,
                     child: TextFormField(
                       controller: checkin,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Field value is requried";
-                        }
-                        return null;
-                      },
-                      // onTap: () async {
-                      //   FocusScope.of(context).requestFocus(FocusNode());
-                      //   await showDatePicker(
-                      //     context: context,
-                      //     initialDate: DateTime.now(),
-                      //     firstDate: DateTime(DateTime.now().year),
-                      //     lastDate: DateTime(DateTime.now().year + 21),
-                      //   );
-                      // },
-                      decoration: InputDecoration(
-                        labelText: 'Enter Date',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: Colors.blue),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: Colors.red),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.calendar_today_outlined, color: Colors.black,),
+                        labelText: 'Select Date', 
+                        labelStyle: TextStyle(color: Colors.black),
                       ),
+                      onTap: () async {
+                        DateTime? pickeddate = await showDatePicker(
+                          context: context, 
+                          initialDate: DateTime.now(), 
+                          firstDate: DateTime(2022), 
+                          lastDate: DateTime(2033)
+                          );
+                          if(pickeddate != null){
+                            setState(() {
+                              checkin.text = DateFormat('yyyy-MM-dd').format(pickeddate);
+                            });
+                          }
+                      },
                     ),
-                  ),
+                    ),
                   SizedBox(
-                    height: 15,
+                    height: 30,
                   ),
                   Text(
                     'Check-Out:',
@@ -156,41 +149,32 @@ class _BookingScreenState extends State<BookingScreen> {
                         color: Color.fromARGB(255, 41, 72, 87)),
                   ),
                   SizedBox(height: 10),
-                  SizedBox(
+                   SizedBox(
                     width: 250,
                     child: TextFormField(
                       controller: checkout,
-
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Field value is requried";
-                        }
-                        return null;
-                      },
-                      // onTap: () async {
-                      //   FocusScope.of(context).requestFocus(FocusNode());
-                      //   await showDatePicker(
-                      //     context: context,
-                      //     initialDate: DateTime.now(),
-                      //     firstDate: DateTime(DateTime.now().year),
-                      //     lastDate: DateTime(DateTime.now().year + 21),
-                      //   );
-                      // },
-                      decoration: InputDecoration(
-                        labelText: 'Enter Date',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: Colors.blue),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: Colors.red),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.calendar_today_outlined, color: Colors.black,),
+                        labelText: 'Select Date', 
+                        labelStyle: TextStyle(color: Colors.black),
                       ),
+                      onTap: () async {
+                        DateTime? pickeddate = await showDatePicker(
+                          context: context, 
+                          initialDate: DateTime.now(), 
+                          firstDate: DateTime(2022), 
+                          lastDate: DateTime(2033)
+                          );
+                          if(pickeddate != null){
+                            setState(() {
+                              checkout.text = DateFormat('yyyy-MM-dd').format(pickeddate);
+                            });
+                          }
+                      },
                     ),
-                  ),
+                    ),
                   SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   Text(
                     'Room:',
@@ -226,7 +210,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   Text(
                     'Guest:',
@@ -304,8 +288,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () async {
-                        if (name.text == '' ||
-                            roomneeded.text == '' ||
+                        if (name.text == '' || roomneeded.text == '' ||
                             adult.text == '' ||
                             child.text == '') {
                           _showDialogEmptyBooking();
@@ -340,6 +323,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           } else {
                             print("Failure");
                           }
+                         
                         }
                       },
                       child: Text(
@@ -383,7 +367,7 @@ class _BookingScreenState extends State<BookingScreen> {
               style: TextStyle(color: Colors.black, fontSize: 14),
             ),
             content: Text(
-              "Booking is Empty",
+              "Enter Required Field",
               style: TextStyle(color: Colors.black38, fontSize: 14),
             ),
             actions: [

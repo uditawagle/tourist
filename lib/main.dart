@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourguide/Screen/splash.dart';
-import 'package:tourguide/tour/choouy.dart';
+import 'package:tourguide/pages/loginpage.dart';
 import 'package:tourguide/worldclock.dart/chooselocation.dart';
 import 'package:tourguide/worldclock.dart/home.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChoOuy(),
+      home: Login(),
       //home: SplashScreen(),
       routes: {
       '/home': (context) => const Home(),

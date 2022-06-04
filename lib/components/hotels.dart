@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/components/detailshotel.dart';
+import 'package:tourguide/components/hoteldet.dart';
 import 'package:tourguide/components/hoteldetails.dart';
 import 'package:tourguide/pages/destination.dart';
 
@@ -148,20 +149,7 @@ class _HotelsState extends State<Hotels> {
                         );
                       },
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    ImagePlace(
-                      images: 'assets/hotel/tigerlodge.jpg',
-                      text: 'Tiger Tops Tharu \nLodge',
-                      press: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TigerTopsTharuLodge()),
-                        );
-                      },
-                    ),
+                    
                     SizedBox(
                       width: 20,
                     ),
@@ -282,54 +270,7 @@ class _HotelsState extends State<Hotels> {
               SizedBox(
                 height: 5,
               ),
-              Deals(
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HotelHeritage()),
-                  );
-                },
-                image: 'assets/hotel/heritage.jpg',
-                text: 'Hotel Heritage',
-                subtext: 'Suryabinayak, 44800 Bhaktapur',
-                ptext:
-                    'Hotel Heritage is a 7-minute walk from Bhaktapur Durbar Square offering air-conditioned rooms, free wifi, private parking.',
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Deals(
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MeghauliSerai()),
-                  );
-                },
-                image: 'assets/hotel/taj.jpg',
-                text: 'Meghauli Serai, A Taj Safari',
-                subtext: 'Ward no 1 Narayani Nager Palika, Chitwan',
-                ptext:
-                    '5-Star Resort Meghauli Serai Chitwan National Park offers you a unique experience into our luxury safari lodge amidst a unique natural ecosystem.',
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Deals(
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ManakamanaResort()),
-                  );
-                },
-                image: 'assets/hotel/manakamana.jpg',
-                text: 'Manakamana Fulbari Resort',
-                subtext: 'Manakamana, Gorkha',
-                ptext:
-                    'Manakamana Fulbari Resort provides the best amenities for its guests, wifi, tour desk, banquet space and so on.',
-              ),
-              SizedBox(
-                height: 5,
-              ),
+            
               Deals(
                 press: () {
                   Navigator.push(

@@ -237,6 +237,215 @@ class DatabaseService{
     return rlist;
   }
 
+  Future<List<Gokarna>> golist() async {
+    var data = await http.get(
+      Uri.parse("$BASE_URL/api/gokarna"),
+    );
+    var jsonData = json.decode((data.body));
+    List<Gokarna> golist = [];
+    for (var each in jsonData) {
+      Gokarna gtList = Gokarna(
+       image: each['image'],
+       name: each['name'],
+       location: each['location'],
+       title: each['title'],
+       description: each['description'],
+       title1: each['title1'],
+       text1: each['text1'],
+       text2: each['text2'],
+       text3: each['text3'],
+       text4: each['text4'],
+       text5: each['text5'],
+       text6: each['text6'],
+       text7: each['text7'],
+       text8: each['text8'],
+       title3: each['title3'],
+       title4: each['title4'],
+       price: each['price'],
+       button: each['button'],
+    );
+      golist.add(gtList);
+    }
+    return golist;
+  }
+
+  Future<List<Gatewayy>> gatelist() async {
+    var data = await http.get(
+      Uri.parse("$BASE_URL/api/gateway"),
+    );
+    var jsonData = json.decode((data.body));
+    List<Gatewayy> gatelist = [];
+    for (var each in jsonData) {
+      Gatewayy List = Gatewayy(
+       image: each['image'],
+       name: each['name'],
+       location: each['location'],
+       title: each['title'],
+       description: each['description'],
+       title1: each['title1'],
+       text1: each['text1'],
+       text2: each['text2'],
+       text3: each['text3'],
+       text4: each['text4'],
+       text5: each['text5'],
+       title3: each['title3'],
+       title4: each['title4'],
+       price: each['price'],
+       button: each['button'],
+    );
+      gatelist.add(List);
+    }
+    return gatelist;
+  }
+
+  Future<List<Tulaja>> tlist() async {
+    var data = await http.get(
+      Uri.parse("$BASE_URL/api/tulaja"),
+    );
+    var jsonData = json.decode((data.body));
+    List<Tulaja> tlist = [];
+    for (var each in jsonData) {
+      Tulaja List = Tulaja(
+       image: each['image'],
+       name: each['name'],
+       location: each['location'],
+       title: each['title'],
+       description: each['description'],
+       title1: each['title1'],
+       text1: each['text1'],
+       text2: each['text2'],
+       title3: each['title3'],
+       title4: each['title4'],
+       price: each['price'],
+       button: each['button'],
+    );
+      tlist.add(List);
+    }
+    return tlist;
+  }
+
+  Future<List<Shambala>> shlist() async {
+    var data = await http.get(
+      Uri.parse("$BASE_URL/api/shambala"),
+    );
+    var jsonData = json.decode((data.body));
+    List<Shambala> shlist = [];
+    for (var each in jsonData) {
+      Shambala List = Shambala(
+       image: each['image'],
+       name: each['name'],
+       location: each['location'],
+       title: each['title'],
+       description: each['description'],
+       title1: each['title1'],
+       text1: each['text1'],
+       text2: each['text2'],
+       text3: each['text3'],
+       text4: each['text4'],
+       title3: each['title3'],
+       title4: each['title4'],
+       price: each['price'],
+       button: each['button'],
+    );
+      shlist.add(List);
+    }
+    return shlist;
+  }
+
+  
+  Future<List<Forest>> flist() async {
+    var data = await http.get(
+      Uri.parse("$BASE_URL/api/forest"),
+    );
+    var jsonData = json.decode((data.body));
+    List<Forest> flist = [];
+    for (var each in jsonData) {
+      Forest List = Forest(
+      image: each['image'],
+       name: each['name'],
+       location: each['location'],
+       title: each['title'],
+       description: each['description'],
+       title1: each['title1'],
+       text1: each['text1'],
+       text2: each['text2'],
+       text3: each['text3'],
+       text4: each['text4'],
+       title3: each['title3'],
+       title4: each['title4'],
+       price: each['price'],
+       button: each['button'],
+    );
+      flist.add(List);
+    }
+    return flist;
+  }
+ 
+  Future<List<TigerPokhara>> tiglist() async {
+    var data = await http.get(
+      Uri.parse("$BASE_URL/api/tigerpokhara"),
+    );
+    var jsonData = json.decode((data.body));
+    List<TigerPokhara> tiglist = [];
+    for (var each in jsonData) {
+      TigerPokhara pokharaList = TigerPokhara(
+       image: each['image'],
+       name: each['name'],
+       location: each['location'],
+       title: each['title'],
+       description: each['description'],
+       title1: each['title1'],
+       text1: each['text1'],
+       text2: each['text2'],
+       text3: each['text3'],
+       text4: each['text4'],
+       text5: each['text5'],
+       text6: each['text6'],
+       text7: each['text7'],
+       title3: each['title3'],
+       title4: each['title4'],
+       price: each['price'],
+       button: each['button'],
+    );
+      tiglist.add(pokharaList);
+    }
+    return tiglist;
+  }
+
+
+
+  Future<List<HotelEncounter>> elist() async {
+    var data = await http.get(
+      Uri.parse("$BASE_URL/api/encounter"),
+    );
+    var jsonData = json.decode((data.body));
+    List<HotelEncounter> elist = [];
+    for (var each in jsonData) {
+      HotelEncounter gtList = HotelEncounter(
+       image: each['image'],
+       name: each['name'],
+       location: each['location'],
+       title: each['title'],
+       description: each['description'],
+       title1: each['title1'],
+       text1: each['text1'],
+       text2: each['text2'],
+       text3: each['text3'],
+       text4: each['text4'],
+       text5: each['text5'],
+       text6: each['text6'],
+       text7: each['text7'],
+       text8: each['text8'],
+       title3: each['title3'],
+       title4: each['title4'],
+       price: each['price'],
+       button: each['button'],
+    );
+      elist.add(gtList);
+    }
+    return elist;
+  }
+
 
 // for feedback 
   Future<int> insertfeedback(String uid, String email, String rate, String feedbacks) async {

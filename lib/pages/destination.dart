@@ -2,6 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tourguide/components/bhaktapurr.dart';
 import 'package:tourguide/components/everest.dart';
+import 'package:tourguide/tour/annapurnacamp.dart';
+import 'package:tourguide/tour/bhotekoshi.dart';
+import 'package:tourguide/tour/budanikantha.dart';
+import 'package:tourguide/tour/changu.dart';
+import 'package:tourguide/tour/chitwan.dart';
+import 'package:tourguide/tour/choouy.dart';
+import 'package:tourguide/tour/dakshinkali.dart';
+import 'package:tourguide/tour/dudhpokhari.dart';
+import 'package:tourguide/tour/gaunsahar.dart';
+import 'package:tourguide/tour/ghorepani.dart';
+import 'package:tourguide/tour/gokyo.dart';
+import 'package:tourguide/tour/gosaikunda.dart';
+import 'package:tourguide/tour/kangchenjunga.dart';
+import 'package:tourguide/tour/karnalirafting.dart';
+import 'package:tourguide/tour/koskiNP.dart';
+import 'package:tourguide/tour/kusum.dart';
+import 'package:tourguide/tour/langtang.dart';
+import 'package:tourguide/tour/lhoste.dart';
+import 'package:tourguide/tour/makalu.dart';
+import 'package:tourguide/tour/manakamana.dart';
+import 'package:tourguide/tour/manaslu.dart';
+import 'package:tourguide/tour/marshyangdi.dart';
+import 'package:tourguide/tour/narphu.dart';
+import 'package:tourguide/tour/panch.dart';
+import 'package:tourguide/tour/parsa.dart';
+import 'package:tourguide/tour/pashupati.dart';
+import 'package:tourguide/tour/phew.dart';
+import 'package:tourguide/tour/pokharabungee.dart';
+import 'package:tourguide/tour/rara.dart';
+import 'package:tourguide/tour/shey.dart';
+import 'package:tourguide/tour/trishuli.dart';
+import 'package:tourguide/tour/uppermustang.dart';
+import 'package:tourguide/tour/upperseti.dart';
 
 class Destination extends StatefulWidget {
   const Destination({Key? key}) : super(key: key);
@@ -58,104 +91,6 @@ class _DestinationState extends State<Destination> {
                         width: 20,
                       ),
                       ImagePlace(
-                        images: 'assets/travel/dhudhpokhari.jpg',
-                        text: 'Dudhpokhari',
-                        press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => DestinationDetail()),
-                          // );
-                        },
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/temple.jpg',
-                        text: ' Pashupatinath \nTemple',
-                        press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => DestinationDetail()),
-                          // );
-                        },
-                      ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // ImagePlace(
-                      //   images: 'assets/travel/Mustang.jpg',
-                      //   text: 'Mustang',
-                      //   press: () {
-                      //     // Navigator.push(
-                      //     //   context,
-                      //     //   MaterialPageRoute(
-                      //     //       builder: (context) => DestinationDetail()),
-                      //     // );
-                      //   },
-                      // ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => DestinationDetail()),
-                          // );
-                        },
-                        images: 'assets/travel/langtang.jpg',
-                        text: 'Langtang \nNational \nPark',
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => DestinationDetail()),
-                          // );
-                        },
-                        images: 'assets/travel/gosaikunda.jpg',
-                        text: ' Gosaikunda \nLake',
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/Basecamp.jpg',
-                        text: 'Annapurna \nBase Camp',
-                        press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => DestinationDetail()),
-                          // );
-                        },
-                      ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // ImagePlace(
-                      //   images: 'assets/travel/sarangkot.jpg',
-                      //   text: 'Sarangkot',
-                      //   press: () {
-                      //     // Navigator.push(
-                      //     //   context,
-                      //     //   MaterialPageRoute(
-                      //     //       builder: (context) => DestinationDetail()),
-                      //     // );
-                      //   },
-                     // ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
                         images: 'assets/travel/bhaktapurr.jpg',
                         text: ' Bhaktapur \nDurbar \nSquare ',
                         press: () {
@@ -170,14 +105,85 @@ class _DestinationState extends State<Destination> {
                         width: 20,
                       ),
                       ImagePlace(
+                        images: 'assets/travel/dhudhpokhari.jpg',
+                        text: 'Dudhpokhari',
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Dudhpokhari()),
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ImagePlace(
+                        images: 'assets/travel/temple.jpg',
+                        text: ' Pashupatinath \nTemple',
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Pashupatinath()),
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ImagePlace(
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LangtangTrek()),
+                          );
+                        },
+                        images: 'assets/travel/langtang.jpg',
+                        text: 'Langtang \nNational \nPark',
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ImagePlace(
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GosaikundaLake()),
+                          );
+                        },
+                        images: 'assets/travel/gosaikunda.jpg',
+                        text: ' Gosaikunda \nLake',
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ImagePlace(
+                        images: 'assets/travel/Basecamp.jpg',
+                        text: 'Annapurna \nBase Camp',
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AnnapurnaCamp()),
+                          );
+                        },
+                      ),
+                      
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ImagePlace(
                         images: 'assets/travel/Gausahar.jpg',
                         text: 'Lamjung \nGausahar',
                         press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => DestinationDetail()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Gaunsahar()),
+                          );
                         },
                       ),
                     ],
@@ -197,7 +203,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/kanchenjunga.jpg',
                         text: 'Mt. \nKanchenjunga',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Kangchenjunga()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -205,7 +217,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/lhotse.jpg',
                         text: 'Mt. Lhotse',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Lhotse()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -213,7 +231,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/makalu.jpg',
                         text: 'Mt. Makalu',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Makalu()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -221,7 +245,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/Everest.jpg',
                         text: 'Mt. Mount \nEverest',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EverestDetail()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -229,15 +259,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/chooyu.jpg',
                         text: 'Mt. Cho Oyu',
-                        press: () {},
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImagePlace(
-                        images: 'assets/travel/dhaulagiri.jpg',
-                        text: ' Mt. \nDhaulagiri',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChoOuy()),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -256,7 +284,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/changu.jpg',
                         text: 'Changu \nNarayan \nTemple',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChanguTemple()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -264,7 +298,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/manakamana.jpg',
                         text: ' Manakamana \nTemple',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Manakamana()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -272,7 +312,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/dakshinkali.jpg',
                         text: ' Dakshinkali \nTemple',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Dakshinkali()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -280,23 +326,27 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/temple.jpg',
                         text: ' Pashupatinath \nTemple',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Pashupatinath()),
+                          );
+                        },
                       ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // ImagePlace(
-                      //   images: 'assets/travel/guhyeshwari.jpg',
-                      //   text: '  Guhyeshwari \nTemple',
-                      //   press: () {},
-                      // ),
                       SizedBox(
                         width: 20,
                       ),
                       ImagePlace(
                         images: 'assets/travel/budhanilkantha.jpg',
                         text: ' Budhanilkantha \nTemple',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Budhanilkantha()),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -315,7 +365,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/bhotekhosi.jpg',
                         text: 'Bhote \nKoshi Gorge \nBungee',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BhoteBungee()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -323,7 +379,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/pokharabungee.jpg',
                         text: 'Pokhara \nBungee Jump \nSafety',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PokharaBungee()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -331,7 +393,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/kushmabungee.jpg',
                         text: 'Kusma \nBungee \nJump',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => KusumBungee()),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -350,23 +418,27 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/chitwan.jpg',
                         text: 'Chitwan \nNational \nPark.',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChitwanNP()),
+                          );
+                        },
                       ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // ImagePlace(
-                      //   images: 'assets/travel/bardiya.jpg',
-                      //   text: 'Bardiya \nNational \nPark.',
-                      //   press: () {},
-                      // ),
                       SizedBox(
                         width: 20,
                       ),
                       ImagePlace(
                         images: 'assets/travel/koshi.jpg',
                         text: 'Koshi \nTappu \nWildlife \nReserve.',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => KoshiNP()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -374,7 +446,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/parsa.jpg',
                         text: 'Parsa \nWildlife \nReserve',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ParsaNP()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -382,7 +460,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/sheyphoksundo.jpg',
                         text: 'Shey-Phoksundo \nNational \nPark',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SheyNP()),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -401,7 +485,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/setirafting.jpg',
                         text: 'Upper \nSeti \nRiver \nRafting \nTour',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UppersetiRiver()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -409,7 +499,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/karnali.jpg',
                         text: 'Karnali \nRiver \nRafting \nTour',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => KarnaliRiver()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -417,32 +513,29 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/marshyangdi.jpg',
                         text: 'Marshyangdi \nRiver \nRafting \nTour',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MarshyangdiRiver()),
+                          );
+                        },
                       ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // ImagePlace(
-                      //   images: 'assets/travel/sunkosi.jpg',
-                      //   text: 'Sun Kosi \nRiver \nRafting \nTour',
-                      //   press: () {},
-                      // ),
                       SizedBox(
                         width: 20,
                       ),
                       ImagePlace(
                         images: 'assets/travel/trisuli.jpg',
                         text: 'Trisuli \nRiver \nRafting \nTour',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TrishuliRiver()),
+                          );
+                        },
                       ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // ImagePlace(
-                      //   images: 'assets/travel/bhotekoshi.jpg',
-                      //   text: 'Bhote \nKoshi \nRiver \nRafting \nTour',
-                      //   press: () {},
-                      // ),
+                    
                     ],
                   ),
                 ),
@@ -460,7 +553,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/poonhill.jpg',
                         text: 'Ghorepani \nPoon Hill \nTrek',
-                        press: () {},
+                        press: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PoolHill()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -468,7 +567,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/langtangtrek.jpg',
                         text: 'Langtang \nValley \nTrek',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LangtangTrek()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -476,7 +581,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/manaslu.jpg',
                         text: 'Manaslu \nCircuit \nTrek',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ManasluTrek()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -484,7 +595,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/mustangtrek.jpg',
                         text: 'Upper \nMustang \nTrek',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MustangTrek()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -492,7 +609,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/gokyo.jpg',
                         text: 'Gokyo \nLakes \nTrek',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GokyoTrek()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -500,7 +623,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/narphu.jpg',
                         text: 'Nar Phu \nValley \nTrek',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NarPhu()),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -519,7 +648,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/panchpokhari.jpg',
                         text: 'Panch \nPokhari \nLake',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PanchPokhari()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -527,31 +662,27 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/rara.jpg',
                         text: 'Rara Lake',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RaraLake()),
+                          );
+                        },
                       ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // ImagePlace(
-                      //   images: 'assets/travel/sheypokshundo.jpg',
-                      //   text: 'Shey-Pokshundo \nLake',
-                      //   press: () {},
-                      // ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // ImagePlace(
-                      //   images: 'assets/travel/tiliho.jpg',
-                      //   text: 'Tilicho \nLake',
-                      //   press: () {},
-                      // ),
                       SizedBox(
                         width: 20,
                       ),
                       ImagePlace(
                         images: 'assets/travel/phewa.jpg',
                         text: 'Phewa \nLake',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PhewaLake()),
+                          );
+                        },
                       ),
                       SizedBox(
                         width: 20,
@@ -559,7 +690,13 @@ class _DestinationState extends State<Destination> {
                       ImagePlace(
                         images: 'assets/travel/gosaikunda.jpg',
                         text: 'Gosaikunda \nLake',
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GosaikundaLake()),
+                          );
+                        },
                       ),
                     ],
                   ),
